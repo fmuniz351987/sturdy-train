@@ -11,7 +11,7 @@ int e_primo(int x) {
 	//retorna 0 se x nao e primo ou 1 caso contrario.
 	for(int i = 2; i < x; i++) {
 		if(x % i == 0) return 0;
-		if(x < i * i) break;	//para de testar quando i > sqrt(x) sem precisar calcular sqrt(x)
+		if(x < i * i) return 1;	//para de testar quando i > sqrt(x) sem precisar calcular sqrt(x)
 	}
 	return 1;
 }
@@ -33,7 +33,7 @@ int mdc(int x, int y){
 	return divisor;
 }
 
-int log10_teto(int x) {
+int ndigitos(int x) {
 	// retorna quantos digitos um numero (base decimal) tem
 	int i = 0;
 	while(x >= 10){

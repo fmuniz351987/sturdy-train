@@ -6,6 +6,6 @@ int min(int x, int y);
 
 int mdc(int x, int y);
 
-int log10_teto(int x);
+int ndigitos(int x);
 
 int menor_coprimo(int x);
