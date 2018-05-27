@@ -51,5 +51,8 @@ Module.symvers
 Mkfile.old
 dkms.conf
 
-#Instructions
+# Instructions
 descricao.pdf
+
+# Sublime project
+*.sublime-workspace
