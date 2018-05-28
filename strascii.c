@@ -24,14 +24,6 @@ void imprimir_vetor(int *vetor, int tamanho){
 	printf("\n");
 }
 
-void resetar_vetor(int *ascii, int tamanho, int base){
-	// coloca todos os valores de um vetor como "base" (ex: -1)
-	// para "resetar" o vetor para o padrão
-	for (int i = 0; i < tamanho; i++){
-		ascii[i] = base;
-	}
-}
-
 int *str_to_ascii(char *mensagem) {
 	//transforma a mensagem em um vetor com valores ASCII
 	int tamanho = strlen(mensagem);
@@ -86,10 +78,12 @@ int *split_ascii(char *mensagem, int totiente, int vector_terminator) {
 	int i = 0, j = 0;
 	int digitos = ndigitos(totiente);
 
-	// resetar_vetor(ascii, tamanho, vector_terminator);
-	// printf("Tamanho: %d\n", tamanho);
 	while(i < tamanho){
 		j = i + digitos;	//final do slice
+		if(mensagem[i] == '0') {
+			i += 1;
+			continue;
+		}
 		slice = strslice(mensagem, i, j);
 		if(slice <= totiente){
 			ascii[cont] = slice;

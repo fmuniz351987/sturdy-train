@@ -9,10 +9,10 @@
 ./codificador.out a AEDSAEDSAEDS b 29 31
 ./codificador.out a AEDSAEDSAEDSOIDASCOE b 29 31
 ./codificador.out a asodnc39fin3ew9ni19wrne9wocjun1wasdcijadbsc9r327ygf76cbhds b 29 31
+./codificador.out a aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa b 31 29
 echo "----Erros esperados----"
 ./codificador.out a AEDS b 3 2
 ./codificador.out a AEDS b -3 3
 ./codificador.out a AEDS b -11 31
 ./codificador.out a AEDS b 0 12
 ./codificador.out a AEDS b 2 2
-./codificador.out a aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa b 31 29

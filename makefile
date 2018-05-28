@@ -1,6 +1,6 @@
 CC = gcc
 
-CFLAGS = -lm -pedantic -Wall -pedantic -std=c11
+CFLAGS = -lm -pedantic -Wall -std=c11
 
 include:
 

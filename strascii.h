@@ -8,6 +8,4 @@ char *concatenar_vetor(int *vetor, int tamanho, int invalido);
 
 int *split_ascii(char *mensagem, int totiente, int vector_terminator);
 
-void resetar_vetor(int *ascii, int tamanho, int base);
-
 void imprimir_vetor(int *vetor, int tamanho);

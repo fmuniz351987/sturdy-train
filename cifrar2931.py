@@ -1,6 +1,9 @@
-#este arquivo é apenas um modelo para o programa final, e foi usado para testes 
-#e comparações com os resultados em C. nenhuma parte desse código foi efetivamente
-#implementada no programa final.
+"""Este arquivo é apenas um modelo para o programa final, e foi usado para testes 
+e comparações com os resultados em C. Nenhuma parte desse código foi efetivamente
+implementada no programa final; no entanto, o código foi usado para determinar os
+resultados esperados em slices de C, pois tive muita dificuldade na separação dos
+slices usando ponteiros, e achei mais fácil tentar escrever primeiro sem preocupar
+com ponteiro para depois escrever me preocupando com eles."""
 
 def mdc(x, y):
     mdiv = 1
