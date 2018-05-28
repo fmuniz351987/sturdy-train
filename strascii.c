@@ -52,15 +52,19 @@ char *ascii_to_str(int *ascii, int tamanho) {
 	return mensagem_saida;
 }
 
-char *strslice(char *texto, int inicio, int fim) {
+int strslice(char *texto, int inicio, int fim) {
 	/* modifica slice para ser uma parte da string texto que começa em inicio (inclusivo) 
 	e termina em fim (exclusivo) */
 	char *slice = malloc((fim - inicio + 1) * sizeof(char));
+	int slice_value;
+	if(fim > strlen(texto)) fim = strlen(texto);	//garante que o slice nao extrapola o fim da string
 	for(int i = inicio; i < fim; i++){
 		slice[i - inicio] = texto[i];
 	}
 	slice[fim - inicio] = '\0';
-	return slice;
+	slice_value = atoi(slice);
+	free(slice);
+	return slice_value;
 }
 
 char *concatenar_vetor(int *vetor, int tamanho, int invalido){
@@ -80,24 +84,24 @@ int *split_ascii(char *mensagem, int totiente, int vector_terminator) {
 	int cont = 0;
 	int slice;
 	int i = 0, j = 0;
+	int digitos = ndigitos(totiente);
 
 	// resetar_vetor(ascii, tamanho, vector_terminator);
 	// printf("Tamanho: %d\n", tamanho);
 	while(i < tamanho){
-		for(j = i+1; j < tamanho + 1; j++){
-			// printf("%d,%d\n", i, j);
-			slice = strslice(mensagem, i, j);
-			if(slice >= totiente){
-				ascii[cont] = strslice(mensagem, i, j - 1);
-				cont++;
-				i = j - 1;
-				break;
-			} else if (strlen(strslice(mensagem, i, tamanho)) < ndigitos(totiente)) {
-				ascii[cont] = strslice(mensagem, i, tamanho);
-				cont++;
-				i = tamanho;
-				break;
-			}
+		j = i + digitos;	//final do slice
+		slice = strslice(mensagem, i, j);
+		if(slice <= totiente){
+			ascii[cont] = slice;
+			cont ++;
+			i = j;
+			continue;
+		} else {
+			slice = strslice(mensagem, i, j - 1);
+			ascii[cont] = slice;
+			cont ++;
+			i = j - 1;
+			continue;
 		}
 	}
 	ascii[cont] = vector_terminator;

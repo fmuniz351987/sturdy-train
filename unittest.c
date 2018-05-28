@@ -113,13 +113,13 @@ void testar_strslice(){
 	char *longtext = "1230975390458723459137451230953049581301320985034";
 	int tamanho = strlen(longtext);
 
-	assert(123 == atoi(strslice(text, 0, 3)));
-	assert(0 == atoi(strslice(text, 0, 0)));
-	assert(1 == atoi(strslice(text, 0, 1)));
-	assert(9751 == atoi(strslice(text, 4, 8)));
-	assert(4 == atoi(strslice(text, 11, 12)));
-	assert(4958130 == atoi(strslice(longtext, 31, 39)));
-	assert(5034 == atoi(strslice(longtext, tamanho - 4, tamanho)));
+	assert(123 == strslice(text, 0, 3));
+	assert(0 == strslice(text, 0, 0));
+	assert(1 == strslice(text, 0, 1));
+	assert(9751 == strslice(text, 4, 8));
+	assert(4 == strslice(text, 11, 12));
+	assert(4958130 == strslice(longtext, 31, 39));
+	assert(5034 == strslice(longtext, tamanho - 4, tamanho));
 }
 
 void testar_concatenar_vetor() {
@@ -145,7 +145,7 @@ void testar_split_ascii() {
 	ascii = split_ascii(mensagem, 800, -1);
 	imprimir_vetor(ascii, 9);
 	for(int i = 0; i < tamanho && vetor_esperado[i] != -1; i++){
-		printf("Esperado: %d\nCalculado: %d\n", vetor_esperado[i], ascii[i]);
+		// printf("Esperado: %d\nCalculado: %d\n", vetor_esperado[i], ascii[i]);
 		assert(ascii[i] == vetor_esperado[i]);
 	}
 	free(ascii);

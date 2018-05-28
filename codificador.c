@@ -18,7 +18,7 @@ int main(int argc, char *argv[]) {
 	int n = p * q;
 	int totiente = totiente_primos(p, q);
 	//a mensagem de saida tera no maximo MAX_STRING_SIZE vezes o numero de digitos de p * q
-	char *mensagem_saida = (char*) malloc((MAX_STRING_SIZE * ndigitos(n) + 1)*sizeof(char));
+	char *mensagem_saida = (char*) malloc((strlen(mensagem) * ndigitos(n) + 1)*sizeof(char));
 	
 	if(!e_primo(p) || !e_primo(q)){
 		// termina o programa caso p ou q nao sejam primos
