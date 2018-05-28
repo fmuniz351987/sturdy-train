@@ -1,18 +1,23 @@
 //Este modulo contem as funcoes responsaveis por codificar e decodificar mensagens
 #include <stdio.h>
-#include <stdlib.h> // funcao atoi()
+#include <stdlib.h>
 #include <string.h>
 #include <math.h>
 
 #include "basemath.h"
 #include "strascii.h"
 
-#define MAX_STRING_SIZE 100
 #define INVALID_PARAMETERS 1
 #define VECTOR_TERMINATOR -1
 
-long int cifrar(int mensagem, int exp_cifragem, int modulo){
-	long int num = 1;
+int cifrar(int mensagem, int exp_cifragem, int modulo){
+	/* Retorna o resultado de m^e mod n, onde:
+	e: exp_cifragem;
+	n: modulo;
+	m: mensagem a ser cifrada (em numeros). */
+
+	int num = 1;
+
 	for(int i = 0; i < exp_cifragem; i++){
 		num *= (mensagem % modulo);
 		num = num % modulo;
@@ -20,20 +25,41 @@ long int cifrar(int mensagem, int exp_cifragem, int modulo){
 	return num;
 }
 
-void codificar(char *mensagem, char *mensagem_saida, int tamanho_entrada, int modulo, int totiente) {
-	int i = 0;
-	int ascii[tamanho_entrada];	//armazena temporariamente os valores ascii dos caracteres da mensagem
+int decifrar(int mensagem_cifrada, int exp_cifragem, int modulo, int totiente){
+	int exp_decifragem = inverso_modular(exp_cifragem, totiente);
+	int num = 1;
 
-	resetar_vetor(ascii, tamanho_entrada, VECTOR_TERMINATOR);
-	str_to_ascii(mensagem, ascii, tamanho_entrada);
-	concatenar_vetor(ascii, mensagem_saida, tamanho_entrada, VECTOR_TERMINATOR);
-	resetar_vetor(ascii, tamanho_entrada, VECTOR_TERMINATOR);
-	printf("Expoente:%d\n", menor_coprimo(totiente));
-	split_ascii(mensagem_saida, ascii, strlen(mensagem_saida), totiente, VECTOR_TERMINATOR);
-	printf("Expoente:%d\n", menor_coprimo(totiente));	//MUDOU???
-	for(i = 0; i < tamanho_entrada && ascii[i] != VECTOR_TERMINATOR; i++){
-		ascii[i] = cifrar(ascii[i], menor_coprimo(totiente), modulo);
+	for(int i = 0; i < exp_decifragem; i++){
+		num *= (mensagem_cifrada % modulo);
+		num = num % modulo;
 	}
-	printf("Segunda concatenacao\n");
-	concatenar_vetor(ascii, mensagem_saida, tamanho_entrada, VECTOR_TERMINATOR);
+	return num;
+}
+
+char *codificar(char *mensagem, int modulo, int totiente) {
+	/* Transforma a mensagem em um vetor com os respectivos valores ASCII;
+	em seguida, concatena esses vetores em uma string. Essa string e cortada de
+	tal maneira que cada corte seja sempre menor que o totiente, e então a nova 
+	string cortada (sliced) e armazenada no vetor *codificado. Esse vetor e, entao,
+	cifrado, e entao concatenado novamente, gerando a mensagem de saida.*/
+
+	int i = 0;
+	int *ascii;
+	int *codificado;
+	char *mensagem_saida;
+	int tamanho = strlen(mensagem);
+	int exp_cifragem = menor_coprimo(totiente);
+
+	ascii = str_to_ascii(mensagem);
+
+	mensagem_saida = concatenar_vetor(ascii, tamanho, VECTOR_TERMINATOR);
+	free(ascii);
+	codificado = split_ascii(mensagem_saida, totiente, VECTOR_TERMINATOR);
+	for(i = 0; i < tamanho && codificado[i] != VECTOR_TERMINATOR; i++){
+		codificado[i] = cifrar(codificado[i], exp_cifragem, modulo);
+	}
+	codificado[i] = VECTOR_TERMINATOR;
+	mensagem_saida = concatenar_vetor(codificado, tamanho, VECTOR_TERMINATOR);
+	free(codificado);
+	return mensagem_saida;
 }
