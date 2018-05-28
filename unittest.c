@@ -10,6 +10,14 @@
 
 #define MAX_STRING_SIZE 100
 
+int *criar_vetor(int tamanho){
+	return (int*) malloc(tamanho * sizeof(int));
+}
+
+char *criar_texto(int tamanho) {
+	return (char*) malloc(tamanho * sizeof(int) + 1);
+}
+
 void assert(int expressao){
 	if (!expressao) {
 		printf("Erro de asserção.\n");
@@ -41,16 +49,6 @@ void testar_matematica() {
 	assert(ndigitos(11) == 2);
 	assert(menor_coprimo(2000) == 3);
 	assert(menor_coprimo(2*3*5*7*9*11*17) == 13);
-}
-
-int *criar_vetor(int tamanho){
-	int *vetor = (int*) malloc(tamanho * sizeof(int));
-	return vetor;
-}
-
-char *criar_texto(int tamanho){
-	char *texto = (char*) malloc(tamanho * sizeof(char));
-	return texto;	
 }
 
 void preencher_vetor(int *vetor, int tamanho){
@@ -87,7 +85,7 @@ void testar_str_to_ascii(){
 	char *texto = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890 ";
 	int tamanho = strlen(texto);
 	int *vetor = criar_vetor(tamanho);
-	str_to_ascii(texto, vetor, tamanho);
+	vetor = str_to_ascii(texto);
 	for(int i = 0; i < tamanho; i++){
 		assert(texto[i] == (char) vetor[i]);
 	}
@@ -100,9 +98,9 @@ void testar_ascii_to_str(int n_testes){
 	for(int i = 0; i < n_testes; i++){
 		if(i > 255) break;
 		int *vetor = criar_vetor(i);
-		char *texto = criar_texto(i+1);
+		char *texto = criar_texto(i);
 		preencher_vetor(vetor, i);
-		ascii_to_str(vetor, texto, i);
+		ascii_to_str(vetor, i);
 		// printf("%s\n", texto);
 		free(vetor);
 		free(texto);
@@ -115,37 +113,42 @@ void testar_strslice(){
 	char *longtext = "1230975390458723459137451230953049581301320985034";
 	int tamanho = strlen(longtext);
 
-	assert(123 == strslice(text, 0, 3));
-	assert(0 == strslice(text, 0, 0));
-	assert(1 == strslice(text, 0, 1));
-	assert(9751 == strslice(text, 4, 8));
-	assert(4 == strslice(text, 11, 12));
-	assert(4958130 == strslice(longtext, 31, 39));
-	assert(5034 == strslice(longtext, tamanho - 4, tamanho));
+	assert(123 == atoi(strslice(text, 0, 3)));
+	assert(0 == atoi(strslice(text, 0, 0)));
+	assert(1 == atoi(strslice(text, 0, 1)));
+	assert(9751 == atoi(strslice(text, 4, 8)));
+	assert(4 == atoi(strslice(text, 11, 12)));
+	assert(4958130 == atoi(strslice(longtext, 31, 39)));
+	assert(5034 == atoi(strslice(longtext, tamanho - 4, tamanho)));
 }
 
 void testar_concatenar_vetor() {
 	printf("Testando concatenacao de vetores...\n");
 	int vetor1[] = {1,2,3,4,5, -1, 0}, n_v1 = 7,
 		vetor2[] = {0,2,0,3,0,6,6,10, 471, -1, 5}, n_v2 = 11;
-	char texto1[n_v1 + 1], texto2[n_v2 + 1];
-	concatenar_vetor(vetor1, texto1, n_v1, -1);
-	concatenar_vetor(vetor2, texto2, n_v2, -1);
+	char *texto1 = malloc((n_v1 + 1)*sizeof(char));
+	char *texto2 = malloc((n_v2 + 1) * sizeof(char));
+	texto1 = concatenar_vetor(vetor1, n_v1, -1);
+	texto2 = concatenar_vetor(vetor2, n_v2, -1);
 	assert(!strcmp(texto1, "12345"));
 	assert(!strcmp(texto2, "020306610471"));
+	free(texto1); free(texto2);
 }
 
 void testar_split_ascii() {
-	printf("Testando split de ascii...\n");
 	char *mensagem = "123510394861039485103";
 	int tamanho = strlen(mensagem);
-	int ascii[tamanho];
+	int *ascii;
 	int vetor_esperado[] = {123, 510, 394, 86, 103, 94, 85, 103, -1};
-	resetar_vetor(ascii, tamanho, -1);
-	split_ascii(mensagem, ascii, tamanho, 800, -1);
+
+	printf("Testando split de ascii...\n");
+	ascii = split_ascii(mensagem, 800, -1);
+	imprimir_vetor(ascii, 9);
 	for(int i = 0; i < tamanho && vetor_esperado[i] != -1; i++){
+		printf("Esperado: %d\nCalculado: %d\n", vetor_esperado[i], ascii[i]);
 		assert(ascii[i] == vetor_esperado[i]);
 	}
+	free(ascii);
 }
 
 void testar_cifrar(){
@@ -162,10 +165,11 @@ void testar_codificar(){
 	char *mensagem = "AEDS";
 	int totiente = 840;
 	int modulo = 899;
-	char *mensagem_saida = (char*) malloc(strlen(mensagem) * ndigitos(modulo) * sizeof(char) + 1);
+	char *mensagem_saida;
 	char *saida_esperada = "83160237844";
-	codificar(mensagem, mensagem_saida, strlen(mensagem), modulo, totiente);
+	mensagem_saida = codificar(mensagem, modulo, totiente);
 	assert(!strcmp(mensagem_saida, saida_esperada));
+	free(mensagem_saida);
 }
 
 int main(int argc, char **argv) {

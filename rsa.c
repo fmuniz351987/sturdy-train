@@ -20,20 +20,28 @@ long int cifrar(int mensagem, int exp_cifragem, int modulo){
 	return num;
 }
 
-void codificar(char *mensagem, char *mensagem_saida, int tamanho_entrada, int modulo, int totiente) {
+char *codificar(char *mensagem, int modulo, int totiente) {
 	int i = 0;
-	int ascii[tamanho_entrada];	//armazena temporariamente os valores ascii dos caracteres da mensagem
+	//armazena temporariamente os valores ascii dos caracteres da mensagem
+	int *ascii;
+	int *codificado;
+	char *mensagem_saida;
+	int tamanho = strlen(mensagem);
 
-	resetar_vetor(ascii, tamanho_entrada, VECTOR_TERMINATOR);
-	str_to_ascii(mensagem, ascii, tamanho_entrada);
-	concatenar_vetor(ascii, mensagem_saida, tamanho_entrada, VECTOR_TERMINATOR);
-	resetar_vetor(ascii, tamanho_entrada, VECTOR_TERMINATOR);
-	printf("Expoente:%d\n", menor_coprimo(totiente));
-	split_ascii(mensagem_saida, ascii, strlen(mensagem_saida), totiente, VECTOR_TERMINATOR);
-	printf("Expoente:%d\n", menor_coprimo(totiente));	//MUDOU???
-	for(i = 0; i < tamanho_entrada && ascii[i] != VECTOR_TERMINATOR; i++){
-		ascii[i] = cifrar(ascii[i], menor_coprimo(totiente), modulo);
+	ascii = str_to_ascii(mensagem);
+
+	mensagem_saida = concatenar_vetor(ascii, tamanho, VECTOR_TERMINATOR);
+	free(ascii);
+	codificado = split_ascii(mensagem_saida, totiente, VECTOR_TERMINATOR);
+	printf("Entrada:%s\nTotiente:%d\nModulo:%d\nExpoente:%d\n", mensagem, totiente, 
+	       modulo, menor_coprimo(totiente));
+	for(i = 0; i < tamanho && codificado[i] != VECTOR_TERMINATOR; i++){
+		codificado[i] = cifrar(codificado[i], menor_coprimo(totiente), modulo);
+		printf("%d\n", codificado[i]);
 	}
-	printf("Segunda concatenacao\n");
-	concatenar_vetor(ascii, mensagem_saida, tamanho_entrada, VECTOR_TERMINATOR);
+	codificado[i] = -1;
+	// printf("Segunda concatenacao\n");
+	mensagem_saida = concatenar_vetor(codificado, tamanho, VECTOR_TERMINATOR);
+	free(codificado);
+	return mensagem_saida;
 }

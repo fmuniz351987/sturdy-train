@@ -10,16 +10,15 @@
 
 int main(int argc, char *argv[]) {
 	// leitura dos parametros de entrada
-	char imagem_entrada[MAX_STRING_SIZE];
-	char mensagem[MAX_STRING_SIZE];
-	char imagem_saida[MAX_STRING_SIZE];
+	// char *imagem_entrada = argv[1];
+	char *mensagem = argv[2];
+	// char *imagem_saida = argv[3];
 	int p = atoi(argv[4]);
 	int q = atoi(argv[5]);
 	int n = p * q;
-	int tamanho_mensagem;
 	int totiente = totiente_primos(p, q);
 	//a mensagem de saida tera no maximo MAX_STRING_SIZE vezes o numero de digitos de p * q
-	char mensagem_saida[MAX_STRING_SIZE * ndigitos(n)];
+	char *mensagem_saida = (char*) malloc((MAX_STRING_SIZE * ndigitos(n) + 1)*sizeof(char));
 	
 	if(!e_primo(p) || !e_primo(q)){
 		// termina o programa caso p ou q nao sejam primos
@@ -39,13 +38,8 @@ int main(int argc, char *argv[]) {
 		}
 	}
 
-	//assimila as strings passadas
-	strcpy(imagem_entrada, argv[1]);
-	strcpy(mensagem, argv[2]);
-	strcpy(imagem_saida, argv[3]);
-	tamanho_mensagem = strlen(mensagem);
-
-	codificar(mensagem, mensagem_saida, tamanho_mensagem, n, totiente);
-	printf("Enciptada: %s\n", mensagem_saida);
+	mensagem_saida = codificar(mensagem, n, totiente);
+	printf("Encriptada: %s\n", mensagem_saida);
+	free(mensagem_saida);
 	return 0;
 }
