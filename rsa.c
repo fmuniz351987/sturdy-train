@@ -25,8 +25,9 @@ int cifrar(int mensagem, int exp_cifragem, int modulo){
 	return num;
 }
 
-int decifrar(int mensagem_cifrada, int exp_cifragem, int modulo, int totiente){
-	int exp_decifragem = inverso_modular(exp_cifragem, totiente);
+int decifrar(int mensagem_cifrada, int exp_decifragem, int modulo)
+{
+	// decifra um caractere de uma mensagem baseado no modulo e no expoente de decifragem.
 	int num = 1;
 
 	for(int i = 0; i < exp_decifragem; i++){
@@ -62,7 +63,23 @@ char *codificar(char *mensagem, int modulo, int totiente) {
 	mensagem_saida = concatenar_vetor(codificado, tamanho, VECTOR_TERMINATOR);
 	free(codificado);
 	tamanho = strlen(mensagem_saida);
-	mensagem_saida[tamanho] = '.';
-	mensagem_saida[tamanho + 1] = '\0';
+	mensagem_saida[tamanho] = '\0';
 	return mensagem_saida;
+}
+
+char *decodificar(char *mensagem_codificada, int modulo, int exp_decifragem)
+{
+	int i = 0;
+	char *mensagem_decodificada;
+	int *ascii;
+	int *decodificado; 
+	int tamanho = strlen(mensagem_codificada);
+
+	ascii = split_ascii(mensagem_codificada, menor_coprimo(modulo), VECTOR_TERMINATOR);
+	free(ascii);
+	for(i = 0; i < tamanho && codificado[i] != VECTOR_TERMINATOR; i++){
+		decodificado[i] = decifrar(ascii[i], exp_decifragem, modulo);
+	}
+	decodificado[i] = VECTOR_TERMINATOR;
+	// mensagem_decodificada = concatenar_vetor(decodificado, );
 }

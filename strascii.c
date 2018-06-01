@@ -70,13 +70,15 @@ char *concatenar_vetor(int *vetor, int tamanho, int invalido){
 	return texto_saida;
 }
 
-int *split_ascii(char *mensagem, int totiente, int vector_terminator) {
+int *split_ascii(char *mensagem, int maximo, int vector_terminator) {
+	/* divide uma string numerica em varios inteiros menores que o parametro
+	fornencido para o maximo, e depois retorna um array com esses inteiros. */
 	int tamanho = strlen(mensagem);
 	int *ascii = (int*) malloc((tamanho) * sizeof(int));
 	int cont = 0;
 	int slice;
 	int i = 0, j = 0;
-	int digitos = ndigitos(totiente);
+	int digitos = ndigitos(maximo);
 
 	while(i < tamanho){
 		j = i + digitos;	//final do slice
@@ -85,7 +87,7 @@ int *split_ascii(char *mensagem, int totiente, int vector_terminator) {
 			continue;
 		}
 		slice = strslice(mensagem, i, j);
-		if(slice <= totiente){
+		if(slice <= maximo){
 			ascii[cont] = slice;
 			cont ++;
 			i = j;
