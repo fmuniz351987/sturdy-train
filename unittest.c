@@ -32,7 +32,7 @@ auctor efficitur.";
 271051619853863760454581998715586645452416981922747911393612134237177938362421\
 318821688862416716988862416716922128841371773839826961390370448264987236818988\
 937458698775898847919475318813938886473288865283681445939340145742178151016731\
-881655";
+881655.";
 
 int *criar_vetor(int tamanho){
 	return (int*) malloc(tamanho * sizeof(int));
@@ -199,13 +199,13 @@ int main(int argc, char **argv) {
 	testar_concatenar_vetor();
 	testar_split_ascii();
 	testar_cifrar();
-	testar_codificar("AEDS", "83160237844", 29, 31);
-	testar_codificar("AEDSAEDS", "83160237847631937844", 29, 31);
+	testar_codificar("AEDS", "83160237844.", 29, 31);
+	testar_codificar("AEDSAEDS", "83160237847631937844.", 29, 31);
 	testar_codificar("Mensagem secreta!", 
-	                 "12551110154397513022700156312612167250396117602187",
+	                 "12551110154397513022700156312612167250396117602187.",
 	                 101, 31);
 	testar_codificar("Mensagem secreta!", 
-	                 "12551110154397513022700156312612167250396117602187",
+	                 "12551110154397513022700156312612167250396117602187.",
 	                 101, 31);
 	testar_codificar(supertexto, supertexto_codificado, 101, 103);
 	return 0;

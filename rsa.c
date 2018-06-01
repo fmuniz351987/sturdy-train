@@ -61,5 +61,8 @@ char *codificar(char *mensagem, int modulo, int totiente) {
 	codificado[i] = VECTOR_TERMINATOR;
 	mensagem_saida = concatenar_vetor(codificado, tamanho, VECTOR_TERMINATOR);
 	free(codificado);
+	tamanho = strlen(mensagem_saida);
+	mensagem_saida[tamanho] = '.';
+	mensagem_saida[tamanho + 1] = '\0';
 	return mensagem_saida;
 }
