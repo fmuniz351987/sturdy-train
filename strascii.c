@@ -62,7 +62,7 @@ int strslice(char *texto, int inicio, int fim) {
 char *concatenar_vetor(int *vetor, int tamanho, int invalido){
 	/* transforma uma sequencia de numeros (vetor) em uma string, que é armazenada
 	em texto_saida */
-	char *texto_saida = (char*) malloc(tamanho * ndigitos(max_vetor_positivos(vetor, tamanho) + 1)
+	char *texto_saida = (char*) malloc(tamanho * ndigitos(max_vetor_positivos(vetor, tamanho) + 2)
 			 * sizeof(char));
 	for(int i = 0; i < tamanho && vetor[i] != invalido; i++){
 		sprintf(texto_saida, "%s%i", texto_saida, vetor[i]);

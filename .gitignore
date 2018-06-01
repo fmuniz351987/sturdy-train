@@ -56,3 +56,6 @@ descricao.pdf
 
 # Sublime project
 *.sublime-workspace
+
+# Code-generated
+private.txt
