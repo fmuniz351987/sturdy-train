@@ -19,8 +19,8 @@ int main(int argc, char *argv[]) {
 	int e = menor_coprimo(totiente);
 	int d = inverso_modular(e, totiente);
 	char *mensagem_saida;
-	char *chave;
-	FILE *chave_privada;
+	char *chave = (char*) malloc(sizeof(char) * 100);
+	FILE *file_pkey;	//arquivo de saida da chave privada
 	
 	if(!e_primo(p) || !e_primo(q)){
 		// termina o programa caso p ou q nao sejam primos
@@ -39,8 +39,9 @@ int main(int argc, char *argv[]) {
 	free(mensagem_saida);
 	printf("Chave publica: (%d, %d)\nChave privada: (%d, %d)\n", n, e, n, d);
 	sprintf(chave, "%d\n%d\n", n, d);
-	chave_privada = fopen("private.txt", "w");
-	fputs(chave, chave_privada);
-	fclose(chave_privada);
+	file_pkey = fopen("private.txt", "w");
+	fputs(chave, file_pkey);
+	free(chave);
+	fclose(file_pkey);
 	return 0;
 }
