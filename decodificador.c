@@ -30,9 +30,9 @@ int main(int argc, char **argv) {
 	//obtendo a chave privada
 	file = fopen(chave, "r");
 	fscanf(file, "%d\n%d", &n, &d);
+	fclose(file);
 	printf("Chave privada: (%d,%d)\n", n, d);
 	printf("Delimitador: %c\n", delimitador);
-	fclose(file);
 	mensagem_codificada = ler_arquivo(imagem_codificada, delimitador);
 	printf("Mensagem codificada: %s\n", mensagem_codificada);
 	mensagem_original = decodificar(mensagem_codificada, n, d);

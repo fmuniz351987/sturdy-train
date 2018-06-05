@@ -1,4 +1,5 @@
 //Este modulo contem as funcoes responsaveis por codificar e decodificar mensagens
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -78,12 +79,16 @@ char *decodificar(char *mensagem_codificada, int modulo, int exp_decifragem)
 	decodificado = (int*) malloc(sizeof(int) * tamanho + 1);
 	printf("Splitting ascii...\n");
 	ascii = split_ascii(mensagem_codificada, modulo, VECTOR_TERMINATOR);
-	free(ascii);
 	for(i = 0; i < tamanho && ascii[i] != VECTOR_TERMINATOR; i++){
 		decodificado[i] = decifrar(ascii[i], exp_decifragem, modulo);
 	}
 	decodificado[i] = VECTOR_TERMINATOR;
 	mensagem_decodificada = concatenar_vetor(decodificado, tamanho, VECTOR_TERMINATOR);
 	free(decodificado);
+	free(ascii);
+	decodificado = split_ascii_puro(mensagem_decodificada, VECTOR_TERMINATOR);
+	free(mensagem_decodificada);
+	mensagem_decodificada = ascii_to_str(decodificado, 
+	    tamanho_vetor_terminado(decodificado, VECTOR_TERMINATOR));
 	return mensagem_decodificada;
 }

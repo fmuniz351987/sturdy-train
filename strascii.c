@@ -7,6 +7,15 @@ ASCII de cada caractere em char[] */
 
 #include "basemath.h"
 
+int tamanho_vetor_terminado(int *vetor, int vector_terminator)
+{
+	int i = 0;
+	while(vetor[i] != vector_terminator){
+		i++;
+	}
+	return i;
+}
+
 int caractere_imprimivel(char caractere)
 {
 	//retorna 1 se o caractere fornecido for imprimivel em ascii ou 0 caso contrario
@@ -97,6 +106,41 @@ int *split_ascii(char *mensagem, int maximo, int vector_terminator) {
 		}
 		slice = strslice(mensagem, i, j);
 		if(slice <= maximo){
+			ascii[cont] = slice;
+			cont ++;
+			i = j;
+			continue;
+		} else {
+			slice = strslice(mensagem, i, j - 1);
+			ascii[cont] = slice;
+			cont ++;
+			i = j - 1;
+			continue;
+		}
+	}
+	ascii[cont] = vector_terminator;
+	return ascii;
+}
+
+int *split_ascii_puro(char *mensagem, int vector_terminator) 
+{
+	/* divide uma string numerica em varios inteiros de caracteres validos
+	em ascii (entre 32 e 126), e depois retorna um array com esses inteiros. */
+	int tamanho = strlen(mensagem);
+	int *ascii = (int*) malloc((tamanho) * sizeof(int));
+	int cont = 0;
+	int slice;
+	int i = 0, j = 0;
+	int digitos = 3;	//maior numero de digitos possivel (126 tem 3 digitos)
+
+	while(i < tamanho){
+		j = i + digitos;	//final do slice
+		if(mensagem[i] == '0') {
+			i += 1;
+			continue;
+		}
+		slice = strslice(mensagem, i, j);
+		if(caractere_imprimivel(slice)){
 			ascii[cont] = slice;
 			cont ++;
 			i = j;
