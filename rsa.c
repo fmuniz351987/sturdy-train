@@ -75,11 +75,15 @@ char *decodificar(char *mensagem_codificada, int modulo, int exp_decifragem)
 	int *decodificado; 
 	int tamanho = strlen(mensagem_codificada);
 
-	ascii = split_ascii(mensagem_codificada, menor_coprimo(modulo), VECTOR_TERMINATOR);
+	decodificado = (int*) malloc(sizeof(int) * tamanho + 1);
+	printf("Splitting ascii...\n");
+	ascii = split_ascii(mensagem_codificada, modulo, VECTOR_TERMINATOR);
 	free(ascii);
-	for(i = 0; i < tamanho && codificado[i] != VECTOR_TERMINATOR; i++){
+	for(i = 0; i < tamanho && ascii[i] != VECTOR_TERMINATOR; i++){
 		decodificado[i] = decifrar(ascii[i], exp_decifragem, modulo);
 	}
 	decodificado[i] = VECTOR_TERMINATOR;
-	// mensagem_decodificada = concatenar_vetor(decodificado, );
+	mensagem_decodificada = concatenar_vetor(decodificado, tamanho, VECTOR_TERMINATOR);
+	free(decodificado);
+	return mensagem_decodificada;
 }

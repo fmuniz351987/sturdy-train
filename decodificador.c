@@ -22,18 +22,21 @@ int main(int argc, char **argv) {
 
 	if(argc != 4){
 		printf("Por favor, use o formato correto: \n");
-		printf("$./decodificador.out imagem_encriptada . private.txt\n");
+		printf("$./decodificador.out \"imagem_encriptada.ppm\" 'terminador' \"chave_privada.txt\"\n");
+		printf("Exemplo: \n$./decodificador.out codificada.txt . private.txt\n");
 		return INVALID_PARAMETERS;
 	}
 
 	//obtendo a chave privada
 	file = fopen(chave, "r");
 	fscanf(file, "%d\n%d", &n, &d);
-	// printf("Chave privada: (%d,%d)\n", n, d);
-	// printf("Delimitador: %c\n", delimitador);
+	printf("Chave privada: (%d,%d)\n", n, d);
+	printf("Delimitador: %c\n", delimitador);
 	fclose(file);
 	mensagem_codificada = ler_arquivo(imagem_codificada, delimitador);
-	printf("%s\n", mensagem_codificada);
+	printf("Mensagem codificada: %s\n", mensagem_codificada);
+	mensagem_original = decodificar(mensagem_codificada, n, d);
+	printf("Decodificada: %s\n", mensagem_original);
 	free(mensagem_codificada);
 	return 0;
 }

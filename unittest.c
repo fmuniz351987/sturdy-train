@@ -183,6 +183,15 @@ void testar_codificar(char *mensagem, char *saida_esperada, int p, int q){
 	free(mensagem_saida);
 }
 
+void testar_caracteres_imprimiveis(){
+	for(int i = 0; i < 256; i++){
+		if(caractere_imprimivel((char) i)){
+			printf("%c", (char) i);
+		}
+	}
+	printf("\n");
+}
+
 int main(int argc, char **argv) {
 	if(argc == 1){
 		printf("ERRO: Insira um numero de testes a serem realizados como argumento da \
@@ -208,5 +217,6 @@ int main(int argc, char **argv) {
 	                 "12551110154397513022700156312612167250396117602187",
 	                 101, 31);
 	testar_codificar(supertexto, supertexto_codificado, 101, 103);
+	testar_caracteres_imprimiveis();
 	return 0;
 }

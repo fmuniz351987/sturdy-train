@@ -9,3 +9,5 @@ char *concatenar_vetor(int *vetor, int tamanho, int invalido);
 int *split_ascii(char *mensagem, int totiente, int vector_terminator);
 
 void imprimir_vetor(int *vetor, int tamanho);
+
+int caractere_imprimivel(char caractere);

@@ -7,6 +7,15 @@ ASCII de cada caractere em char[] */
 
 #include "basemath.h"
 
+int caractere_imprimivel(char caractere)
+{
+	//retorna 1 se o caractere fornecido for imprimivel em ascii ou 0 caso contrario
+	if(caractere <= 126 && caractere >= 32){
+		return 1;
+	}
+	return 0;
+}
+
 int max_vetor_positivos(int *vetor, int tamanho){
 	//retorna o maior valor para um vetor de inteiros positivos
 	int max = 0;
