@@ -101,7 +101,9 @@ int *split_ascii(char *mensagem, int maximo, int vector_terminator) {
 	while(i < tamanho){
 		j = i + digitos;	//final do slice
 		if(mensagem[i] == '0') {
-			i += 1;
+			ascii[cont] = 0;
+			cont++;
+			i++;
 			continue;
 		}
 		slice = strslice(mensagem, i, j);
@@ -136,19 +138,21 @@ int *split_ascii_puro(char *mensagem, int vector_terminator)
 	while(i < tamanho){
 		j = i + digitos;	//final do slice
 		if(mensagem[i] == '0') {
-			i += 1;
+			ascii[cont] = 0;
+			i++;
+			cont++;
 			continue;
 		}
 		slice = strslice(mensagem, i, j);
 		if(caractere_imprimivel(slice)){
 			ascii[cont] = slice;
-			cont ++;
+			cont++;
 			i = j;
 			continue;
 		} else {
 			slice = strslice(mensagem, i, j - 1);
 			ascii[cont] = slice;
-			cont ++;
+			cont++;
 			i = j - 1;
 			continue;
 		}

@@ -38,5 +38,6 @@ int main(int argc, char **argv) {
 	mensagem_original = decodificar(mensagem_codificada, n, d);
 	printf("Decodificada: %s\n", mensagem_original);
 	free(mensagem_codificada);
+	printf("\n\n");
 	return 0;
 }
