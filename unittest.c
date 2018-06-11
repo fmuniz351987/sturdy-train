@@ -172,6 +172,20 @@ void testar_cifrar(){
 	}
 }
 
+void testar_cifragem_e_decifragem(){
+	printf("Testando decifragem e cifragem individualmente...\n");
+	int cifrado, decifrado;
+	int exp_cifragem = 11;
+	int modulo = 899;
+	int exp_decifragem = 611;
+	for(int i = 0; i < modulo; i++){
+		cifrado = cifrar(i, exp_cifragem, modulo);
+		decifrado = decifrar(cifrado, exp_decifragem, modulo);
+		assert(decifrado == i);
+		// printf("i: %d, %d, %d\n", i, cifrado, decifrado);
+	}
+}
+
 void testar_codificar(char *mensagem, char *saida_esperada, int p, int q){
 	printf("Testando codificacao...\n");
 	int totiente = (p-1)*(q-1);
@@ -218,5 +232,6 @@ int main(int argc, char **argv) {
 	                 101, 31);
 	testar_codificar(supertexto, supertexto_codificado, 101, 103);
 	testar_caracteres_imprimiveis();
+	testar_cifragem_e_decifragem();
 	return 0;
 }

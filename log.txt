@@ -1,0 +1,410 @@
+
+Mensagem a codificar: AEDS
+Encriptada: 83160237844
+Chave publica: (899, 11)
+Chave privada: (899, 611)
+Chave privada: (899,611)
+Delimitador: .
+Mensagem codificada: 83160237844
+Splitting ascii...
+Mensagem a ser quebrada: 65696883
+65
+69
+68
+83
+Decodificada: AEDS
+
+
+
+Mensagem a codificar: AEDS
+Encriptada: 1803313953
+Chave publica: (3737, 7)
+Chave privada: (3737, 1543)
+Chave privada: (3737,1543)
+Delimitador: .
+Mensagem codificada: 1803313953
+Splitting ascii...
+Mensagem a ser quebrada: 65696883
+65
+69
+68
+83
+Decodificada: AEDS
+
+
+
+Mensagem a codificar: AEDSA
+Encriptada: 831602378476
+Chave publica: (899, 11)
+Chave privada: (899, 611)
+Chave privada: (899,611)
+Delimitador: .
+Mensagem codificada: 831602378476
+Splitting ascii...
+Mensagem a ser quebrada: 6569688365
+65
+69
+68
+83
+65
+Decodificada: AEDSA
+
+
+
+Mensagem a codificar: AEDSAE
+Encriptada: 831602378476764
+Chave publica: (899, 11)
+Chave privada: (899, 611)
+Chave privada: (899,611)
+Delimitador: .
+Mensagem codificada: 831602378476764
+Splitting ascii...
+Mensagem a ser quebrada: 656968836569
+65
+69
+68
+83
+65
+69
+Decodificada: AEDSAE
+
+
+
+Mensagem a codificar: AEDSAED
+Encriptada: 831602378476319380
+Chave publica: (899, 11)
+Chave privada: (899, 611)
+Chave privada: (899,611)
+Delimitador: .
+Mensagem codificada: 831602378476319380
+Splitting ascii...
+Mensagem a ser quebrada: 65696883656968
+65
+69
+68
+83
+65
+69
+68
+Decodificada: AEDSAED
+
+
+
+Mensagem a codificar: AEDSAEDSAEDS
+Encriptada: 83160237847631937847631937844
+Chave publica: (899, 11)
+Chave privada: (899, 611)
+Chave privada: (899,611)
+Delimitador: .
+Mensagem codificada: 83160237847631937847631937844
+Splitting ascii...
+Mensagem a ser quebrada: 656968836569688365696883
+65
+69
+68
+83
+65
+69
+68
+83
+65
+69
+68
+83
+Decodificada: AEDSAEDSAEDS
+
+
+
+Mensagem a codificar: AEDSAEDSAEDSOIDASCOE
+Encriptada: 831602378476319378476319378888271724160843602138
+Chave publica: (899, 11)
+Chave privada: (899, 611)
+Chave privada: (899,611)
+Delimitador: .
+Mensagem codificada: 831602378476319378476319378888271724160843602138
+Splitting ascii...
+Mensagem a ser quebrada: 6569688365696883656968837973686583677969
+65
+69
+68
+83
+65
+69
+68
+83
+65
+69
+68
+83
+79
+73
+68
+65
+83
+67
+79
+69
+Decodificada: AEDSAEDSAEDSOIDASCOE
+
+
+
+Mensagem a codificar: asodnc39fin3ew9ni19wrne9wocjun1wasdcijadbsc9r327ygf76cbhds
+Encriptada: 872637741671890336847762197770770741467804088974380455653806845957413363757558905337788045050336889375872671242637336657255642908730558208233365622370637
+Chave publica: (899, 11)
+Chave privada: (899, 611)
+Chave privada: (899,611)
+Delimitador: .
+Mensagem codificada: 872637741671890336847762197770770741467804088974380455653806845957413363757558905337788045050336889375872671242637336657255642908730558208233365622370637
+Splitting ascii...
+Mensagem a ser quebrada: 971151111001109951571021028528511195711010549571191240157119111991061171104911997115100991051069710098115998012688547622110310265233476498618115
+97
+115
+111
+100
+110
+99
+51
+57
+102
+102
+85
+28
+ERRO!
+51
+119
+57
+110
+105
+49
+57
+119
+124
+0
+157
+119
+111
+99
+106
+117
+110
+49
+119
+97
+115
+100
+99
+105
+106
+97
+100
+98
+115
+99
+80
+126
+88
+54
+76
+221
+103
+102
+65
+233
+47
+64
+98
+61
+81
+15
+ERRO!
+Decodificada: asodnc39ffU3w9ni19w|
+
+
+
+Mensagem a codificar: asdi1j30d9iqwjdpoqwcw/sff240
+Encriptada: 4232630012426137281400456089159026138303862997958452631239926765872882
+Chave publica: (1147, 7)
+Chave privada: (1147, 463)
+Chave privada: (1147,463)
+Delimitador: .
+Mensagem codificada: 4232630012426137281400456089159026138303862997958452631239926765872882
+Splitting ascii...
+Mensagem a ser quebrada: 97115100105491065148100571051131191061001082289227450151867744676457452318
+97
+115
+100
+105
+49
+106
+51
+48
+100
+57
+105
+113
+119
+106
+100
+108
+228
+92
+27
+ERRO!
+45
+0
+151
+86
+77
+44
+67
+64
+57
+45
+231
+8
+ERRO!
+Decodificada: asdi1j30d9iqwjdlä\-
+
+
+
+Mensagem a codificar: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+Encriptada: 872872872872872872872872872872872872872872872872872872872872872872872872872872872872872872872872872872872872872872872872872872872872872872872872872872872872872872872872872872872872872872872872872872872872872872872872872872872872872872872872872872872872872872872872872872872872872872872872872872872872872872872872872872872872872872872872
+Chave publica: (899, 11)
+Chave privada: (899, 611)
+Chave privada: (899,611)
+Delimitador: .
+Mensagem codificada: 872872872872872872872872872872872872872872872872872872872872872872872872872872872872872872872872872872872872872872872872872872872872872872872872872872872872872872872872872872872872872872872872872872872872872872872872872872872872872872872872872872872872872872872872872872872872872872872872872872872872872872872872872872872872872872872872
+Splitting ascii...
+Mensagem a ser quebrada: 97979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797979797
+97
+97
+97
+97
+97
+97
+97
+97
+97
+97
+97
+97
+97
+97
+97
+97
+97
+97
+97
+97
+97
+97
+97
+97
+97
+97
+97
+97
+97
+97
+97
+97
+97
+97
+97
+97
+97
+97
+97
+97
+97
+97
+97
+97
+97
+97
+97
+97
+97
+97
+97
+97
+97
+97
+97
+97
+97
+97
+97
+97
+97
+97
+97
+97
+97
+97
+97
+97
+97
+97
+97
+97
+97
+97
+97
+97
+97
+97
+97
+97
+97
+97
+97
+97
+97
+97
+97
+97
+97
+97
+97
+97
+97
+97
+97
+97
+97
+97
+97
+97
+97
+97
+97
+97
+97
+97
+97
+97
+97
+97
+97
+97
+Decodificada: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+
+
+----Erros esperados----
+
+ERRO: o produto de p por q deve ser maior ou igual a 255.
+
+ERRO: p e q devem ser numeros primos.
+
+ERRO: p e q devem ser numeros primos.
+
+ERRO: p e q devem ser numeros primos.
+
+ERRO: o produto de p por q deve ser maior ou igual a 255.
+
+ERRO: o produto de p por q deve ser maior ou igual a 255.
+
+ERRO: o produto de p por q deve ser maior ou igual a 255.
+
+ERRO: o produto de p por q deve ser maior ou igual a 255.
