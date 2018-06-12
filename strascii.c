@@ -16,13 +16,14 @@ int tamanho_vetor_terminado(int *vetor, int vector_terminator)
 	return i;
 }
 
-int caractere_imprimivel(char caractere)
+int caractere_imprimivel(int caractere)
 {
 	//retorna 1 se o caractere fornecido for imprimivel em ascii ou 0 caso contrario
-	if(caractere <= 126 && caractere >= 32){
+	if(caractere <= 255 && caractere >= 32){
 		return 1;
+	} else {
+		return 0;
 	}
-	return 0;
 }
 
 int max_vetor_positivos(int *vetor, int tamanho){
@@ -101,17 +102,22 @@ int *split_ascii(char *mensagem, int maximo, int vector_terminator) {
 	while(i < tamanho){
 		j = i + digitos;	//final do slice
 		if(mensagem[i] == '0') {
-			i += 1;
+			printf("0 ");
+			ascii[cont] = 0;
+			cont++;
+			i++;
 			continue;
 		}
 		slice = strslice(mensagem, i, j);
 		if(slice <= maximo){
+			printf("%d ", slice);
 			ascii[cont] = slice;
 			cont ++;
 			i = j;
 			continue;
 		} else {
 			slice = strslice(mensagem, i, j - 1);
+			printf("%d ", slice);
 			ascii[cont] = slice;
 			cont ++;
 			i = j - 1;
@@ -119,13 +125,14 @@ int *split_ascii(char *mensagem, int maximo, int vector_terminator) {
 		}
 	}
 	ascii[cont] = vector_terminator;
+	printf("\n");
 	return ascii;
 }
 
 int *split_ascii_puro(char *mensagem, int vector_terminator) 
 {
 	/* divide uma string numerica em varios inteiros de caracteres validos
-	em ascii (entre 32 e 126), e depois retorna um array com esses inteiros. */
+	em ascii (entre 32 e 255), e depois retorna um array com esses inteiros. */
 	int tamanho = strlen(mensagem);
 	int *ascii = (int*) malloc((tamanho) * sizeof(int));
 	int cont = 0;
@@ -133,26 +140,35 @@ int *split_ascii_puro(char *mensagem, int vector_terminator)
 	int i = 0, j = 0;
 	int digitos = 3;	//maior numero de digitos possivel (126 tem 3 digitos)
 
+	printf("Mensagem a ser quebrada: %s\n", mensagem);
+
 	while(i < tamanho){
 		j = i + digitos;	//final do slice
 		if(mensagem[i] == '0') {
-			i += 1;
+			printf("0 ");
+			ascii[cont] = 0;
+			cont++;
+			i++;
 			continue;
 		}
 		slice = strslice(mensagem, i, j);
 		if(caractere_imprimivel(slice)){
+			printf("%d ", slice);
 			ascii[cont] = slice;
-			cont ++;
+			cont++;
 			i = j;
 			continue;
 		} else {
 			slice = strslice(mensagem, i, j - 1);
+			printf("%d ", slice);
+			if(!caractere_imprimivel(slice)) printf("ERRO!\n");
 			ascii[cont] = slice;
-			cont ++;
+			cont++;
 			i = j - 1;
 			continue;
 		}
 	}
 	ascii[cont] = vector_terminator;
+	printf("\n");
 	return ascii;
 }

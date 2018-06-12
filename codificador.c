@@ -23,18 +23,20 @@ int main(int argc, char *argv[]) {
 	char *chave = (char*) malloc(sizeof(char) * 100);
 	FILE *file_pkey;	//arquivo de saida da chave privada
 	
+	printf("\n");
 	if(!e_primo(p) || !e_primo(q)){
 		// termina o programa caso p ou q nao sejam primos
 		printf("ERRO: p e q devem ser numeros primos.\n");
 		return INVALID_PARAMETERS;
 	}
-	if(n < 9){
+	if(n < 255){
 		//garante que n e pelo menos 9, caso contrario qualquer digito da tabela ASCII
 		//que seja maior que n quebrara o codigo na etapa de segmentacao da mensagem
-		printf("ERRO: o produto de p por q deve ser maior ou igual a 9.\n");
+		printf("ERRO: o produto de p por q deve ser maior ou igual a 255.\n");
 		return INVALID_PARAMETERS;
 	}
 
+	printf("Mensagem a codificar: %s\n", mensagem);
 	mensagem_saida = codificar(mensagem, n, totiente);
 	printf("Encriptada: %s\n", mensagem_saida);
 	arquivo_saida = fopen(imagem_saida, "w");	//mudar forma de abertura na imagem (parte 2)

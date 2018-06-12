@@ -53,10 +53,13 @@ char *codificar(char *mensagem, int modulo, int totiente) {
 	int exp_cifragem = menor_coprimo(totiente);
 
 	ascii = str_to_ascii(mensagem);
+	imprimir_vetor(ascii, tamanho);
 
 	mensagem_saida = concatenar_vetor(ascii, tamanho, VECTOR_TERMINATOR);
 	free(ascii);
-	codificado = split_ascii(mensagem_saida, totiente, VECTOR_TERMINATOR);
+	printf("Splitting ascii...\n");
+	codificado = split_ascii(mensagem_saida, modulo, VECTOR_TERMINATOR);
+	printf("Codificando...\n");
 	for(i = 0; i < tamanho && codificado[i] != VECTOR_TERMINATOR; i++){
 		codificado[i] = cifrar(codificado[i], exp_cifragem, modulo);
 	}
@@ -79,6 +82,7 @@ char *decodificar(char *mensagem_codificada, int modulo, int exp_decifragem)
 	decodificado = (int*) malloc(sizeof(int) * tamanho + 1);
 	printf("Splitting ascii...\n");
 	ascii = split_ascii(mensagem_codificada, modulo, VECTOR_TERMINATOR);
+	printf("Decodificando...\n");
 	for(i = 0; i < tamanho && ascii[i] != VECTOR_TERMINATOR; i++){
 		decodificado[i] = decifrar(ascii[i], exp_decifragem, modulo);
 	}
@@ -86,7 +90,7 @@ char *decodificar(char *mensagem_codificada, int modulo, int exp_decifragem)
 	mensagem_decodificada = concatenar_vetor(decodificado, tamanho, VECTOR_TERMINATOR);
 	free(decodificado);
 	free(ascii);
-	decodificado = split_ascii_puro(mensagem_decodificada, VECTOR_TERMINATOR);
+	decodificado = split_ascii(mensagem_decodificada, modulo, VECTOR_TERMINATOR);
 	free(mensagem_decodificada);
 	mensagem_decodificada = ascii_to_str(decodificado, 
 	    tamanho_vetor_terminado(decodificado, VECTOR_TERMINATOR));
