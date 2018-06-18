@@ -211,7 +211,7 @@ void testar_converter_ascii_e_dividir(){
 	char *mensagem = "Alo mundo!";
 	int maximo = 111;
 	printf("Testando divisao de mensagem...\n");
-	mensagem_dividida = converter_para_ascii_e_dividir(mensagem, maximo);
+	mensagem_dividida = converter_para_ascii_e_dividir(mensagem, maximo, 1);
 	for(int i = 0; mensagem_dividida[i] != -1; i++){
 		// printf("%d ", mensagem_dividida[i]);
 	}

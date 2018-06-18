@@ -26,17 +26,20 @@ int cifrar(int mensagem, int expoente, int modulo){
 	return num;
 }
 
-int *converter_para_ascii_e_dividir(char *mensagem, int max_split){
+int *converter_para_ascii_e_dividir(char *mensagem, int max_split, int para_ascii){
 	// retorna um vetor com uma string dividida em blocos menores que max_split
 	char *mensagem_temp;
 	int *ascii;
 	int tamanho = strlen(mensagem);
 
-	ascii = str_to_ascii(mensagem);
-	mensagem_temp = concatenar_vetor(ascii, tamanho, VECTOR_TERMINATOR);
-	free(ascii);
-	ascii = split_ascii(mensagem_temp, max_split, VECTOR_TERMINATOR);
-	free(mensagem_temp);
+	if(para_ascii){
+		ascii = str_to_ascii(mensagem);
+		mensagem_temp = concatenar_vetor(ascii, tamanho, VECTOR_TERMINATOR);
+		free(ascii);
+		ascii = split_ascii(mensagem_temp, max_split, VECTOR_TERMINATOR);
+	} else {
+		ascii = split_ascii(mensagem, max_split, VECTOR_TERMINATOR);
+	}
 	return ascii;
 }
 
@@ -48,18 +51,14 @@ char *codificar(int *ascii, int modulo, int expoente_cifragem) {
 	cifrado, e entao concatenado novamente, gerando a mensagem de saida.*/
 
 	int i = 0;
-	// int *codificado;
 	char *mensagem_saida;
 	int tamanho = 0;
 
 	for(i = 0; ascii[i] != VECTOR_TERMINATOR; i++){
-		// printf("Cifrando %d...\n", ascii[i]);
 		ascii[i] = cifrar(ascii[i], expoente_cifragem, modulo);
 		tamanho++;
-		// printf("Cifrado: %d\n", ascii[i]);
 	}
 	ascii[i] = VECTOR_TERMINATOR;
-	imprimir_vetor(ascii, i);
 	mensagem_saida = concatenar_vetor(ascii, tamanho, VECTOR_TERMINATOR);
 	tamanho = strlen(mensagem_saida);
 	mensagem_saida[tamanho] = '\0';

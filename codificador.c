@@ -37,7 +37,7 @@ int main(int argc, char *argv[]) {
 	}
 
 	printf("Mensagem a codificar: %s\n", mensagem);
-	codificacao = converter_para_ascii_e_dividir(mensagem, totiente);
+	codificacao = converter_para_ascii_e_dividir(mensagem, totiente, 1);
 	mensagem_saida = codificar(codificacao, n, e);
 	free(codificacao);
 	printf("Encriptada: %s\n", mensagem_saida);
