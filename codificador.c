@@ -41,7 +41,7 @@ int main(int argc, char *argv[]) {
 	printf("Valores em ASCII: ");
 	for(int i = 0; mensagem[i] != '\0'; i++) printf("%d ", (int)mensagem[i]);
 	printf("\n");
-	codificacao = converter_para_ascii_e_dividir(mensagem, n, 1);
+	codificacao = converter_para_ascii_e_dividir(mensagem, totiente, 1);
 	printf("Mensagem em ASCII re-dividida: ");
 	imprimir_vetor(codificacao, strlen(mensagem));
 	mensagem_saida = codificar(codificacao, n, e);
