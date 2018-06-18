@@ -52,7 +52,7 @@ Mkfile.old
 dkms.conf
 
 # Instructions
-descricao.pdf
+desc_TP.pdf
 
 # Sublime project
 *.sublime-workspace

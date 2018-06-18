@@ -21,9 +21,9 @@ int main(int argc, char *argv[]) {
 	int d = inverso_modular(e, totiente);	//expoente de decifragem
 	char *mensagem_saida;
 	char *chave = (char*) malloc(sizeof(char) * 100);
+	int *codificacao;
 	FILE *file_pkey;	//arquivo de saida da chave privada
 	
-	printf("\n");
 	if(!e_primo(p) || !e_primo(q)){
 		// termina o programa caso p ou q nao sejam primos
 		printf("ERRO: p e q devem ser numeros primos.\n");
@@ -37,13 +37,15 @@ int main(int argc, char *argv[]) {
 	}
 
 	printf("Mensagem a codificar: %s\n", mensagem);
-	mensagem_saida = codificar(mensagem, n, totiente);
+	codificacao = converter_para_ascii_e_dividir(mensagem, totiente);
+	mensagem_saida = codificar(codificacao, n, e);
+	free(codificacao);
 	printf("Encriptada: %s\n", mensagem_saida);
 	arquivo_saida = fopen(imagem_saida, "w");	//mudar forma de abertura na imagem (parte 2)
 	fprintf(arquivo_saida, "%s.\n", mensagem_saida);
 	free(mensagem_saida);
 	fclose(arquivo_saida);
-	printf("Chave publica: (%d, %d)\nChave privada: (%d, %d)\n", n, e, n, d);
+	// printf("Chave publica: (%d, %d)\nChave privada: (%d, %d)\n", n, e, n, d);
 	sprintf(chave, "%d\n%d\n", n, d);
 	file_pkey = fopen("private.txt", "w");
 	fputs(chave, file_pkey);

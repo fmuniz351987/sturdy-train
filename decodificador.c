@@ -35,7 +35,7 @@ int main(int argc, char **argv) {
 	printf("Delimitador: %c\n", delimitador);
 	mensagem_codificada = ler_arquivo(imagem_codificada, delimitador);
 	printf("Mensagem codificada: %s\n", mensagem_codificada);
-	mensagem_original = decodificar(mensagem_codificada, n, d);
+	mensagem_original = codificar(mensagem_codificada, n, d);
 	printf("Decodificada: %s\n", mensagem_original);
 	free(mensagem_codificada);
 	printf("\n\n");

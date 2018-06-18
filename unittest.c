@@ -180,22 +180,22 @@ void testar_cifragem_e_decifragem(){
 	int exp_decifragem = 611;
 	for(int i = 0; i < modulo; i++){
 		cifrado = cifrar(i, exp_cifragem, modulo);
-		decifrado = decifrar(cifrado, exp_decifragem, modulo);
+		decifrado = cifrar(cifrado, exp_decifragem, modulo);
 		assert(decifrado == i);
 		// printf("i: %d, %d, %d\n", i, cifrado, decifrado);
 	}
 }
 
-void testar_codificar(char *mensagem, char *saida_esperada, int p, int q){
-	printf("Testando codificacao...\n");
-	int totiente = (p-1)*(q-1);
-	int modulo = p*q;
-	char *mensagem_saida;
-	mensagem_saida = codificar(mensagem, modulo, totiente);
-	assert(!strcmp(mensagem_saida, saida_esperada));
-	printf("Esperada:%s\nCalculada:%s\n", saida_esperada, mensagem_saida);
-	free(mensagem_saida);
-}
+// void testar_codificar(char *mensagem, char *saida_esperada, int p, int q){
+// 	printf("Testando codificacao...\n");
+// 	int totiente = (p-1)*(q-1);
+// 	int modulo = p * q;
+// 	char *mensagem_saida;
+// 	mensagem_saida = codificar(mensagem, modulo, totiente);
+// 	assert(!strcmp(mensagem_saida, saida_esperada));
+// 	printf("Esperada:%s\nCalculada:%s\n", saida_esperada, mensagem_saida);
+// 	free(mensagem_saida);
+// }
 
 void testar_caracteres_imprimiveis(){
 	for(int i = 0; i < 256; i++){
@@ -204,6 +204,33 @@ void testar_caracteres_imprimiveis(){
 		}
 	}
 	printf("\n");
+}
+
+void testar_converter_ascii_e_dividir(){
+	int *mensagem_dividida;
+	char *mensagem = "Alo mundo!";
+	int maximo = 111;
+	printf("Testando divisao de mensagem...\n");
+	mensagem_dividida = converter_para_ascii_e_dividir(mensagem, maximo);
+	for(int i = 0; mensagem_dividida[i] != -1; i++){
+		// printf("%d ", mensagem_dividida[i]);
+	}
+	// printf("\n");
+	assert(mensagem_dividida[0] == 65);
+	assert(mensagem_dividida[1] == 108);
+	assert(mensagem_dividida[2] == 111);
+	assert(mensagem_dividida[3] == 32);
+	assert(mensagem_dividida[4] == 109);
+	assert(mensagem_dividida[5] == 11);
+	assert(mensagem_dividida[6] == 71);
+	assert(mensagem_dividida[7] == 101);
+	assert(mensagem_dividida[8] == 0);
+	assert(mensagem_dividida[9] == 0);
+	assert(mensagem_dividida[10] == 111);
+	assert(mensagem_dividida[11] == 33);
+	assert(mensagem_dividida[12] == -1);
+
+	free(mensagem_dividida);
 }
 
 int main(int argc, char **argv) {
@@ -222,16 +249,17 @@ int main(int argc, char **argv) {
 	testar_concatenar_vetor();
 	testar_split_ascii();
 	testar_cifrar();
-	testar_codificar("AEDS", "83160237844", 29, 31);
-	testar_codificar("AEDSAEDS", "83160237847631937844", 29, 31);
-	testar_codificar("Mensagem secreta!", 
-	                 "12551110154397513022700156312612167250396117602187",
-	                 101, 31);
-	testar_codificar("Mensagem secreta!", 
-	                 "12551110154397513022700156312612167250396117602187",
-	                 101, 31);
-	testar_codificar(supertexto, supertexto_codificado, 101, 103);
+	// testar_codificar("AEDS", "83160237844", 29, 31);
+	// testar_codificar("AEDSAEDS", "83160237847631937844", 29, 31);
+	// testar_codificar("Mensagem secreta!", 
+	//                  "12551110154397513022700156312612167250396117602187",
+	//                  101, 31);
+	// testar_codificar("Mensagem secreta!", 
+	//                  "12551110154397513022700156312612167250396117602187",
+	//                  101, 31);
+	// testar_codificar(supertexto, supertexto_codificado, 101, 103);
 	testar_caracteres_imprimiveis();
 	testar_cifragem_e_decifragem();
+	testar_converter_ascii_e_dividir();
 	return 0;
 }
