@@ -8,7 +8,7 @@
 #include "strascii.h"
 #include "rsa.h"
 
-#define MAX_STRING_SIZE 100
+#define VECTOR_TERMINATOR -1
 
 	char *supertexto = "\
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla massa libero, \
@@ -77,9 +77,11 @@ void testar_matematica() {
 
 void preencher_vetor(int *vetor, int tamanho){
 	//preenche um vetor com seus propios indices correspondentes
-	for(int j = 0; j < tamanho; j++){
+	int j;
+	for(j = 0; j < tamanho - 1; j++){
 		vetor[j] = j+1;
 	}
+	vetor[j] = VECTOR_TERMINATOR;
 }
 
 void testar_impressao_vetor(int n_testes){
@@ -109,8 +111,8 @@ void testar_ascii_to_str(int n_testes){
 	printf("Testando ascii para str...\n");
 	for(int i = 0; i < n_testes; i++){
 		if(i > 255) break;
-		int *vetor = criar_vetor(i);
-		char *texto = criar_texto(i);
+		int *vetor = criar_vetor(i + 1);
+		char *texto = criar_texto(i + 1);
 		preencher_vetor(vetor, i);
 		ascii_to_str(vetor, i);
 		// printf("%s\n", texto);

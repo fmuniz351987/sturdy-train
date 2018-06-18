@@ -20,8 +20,8 @@ int cifrar(int mensagem, int expoente, int modulo){
 	int num = 1;
 
 	for(int i = 0; i < expoente; i++){
-		num *= (mensagem % modulo);
-		num = num % modulo;
+		num *= mensagem;
+		num %= modulo;
 	}
 	return num;
 }

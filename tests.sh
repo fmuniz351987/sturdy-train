@@ -18,6 +18,10 @@
 ./decodificador.out codificada.txt . private.txt
 ./codificador.out a aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa codificada.txt 31 29
 ./decodificador.out codificada.txt . private.txt
+./codificador.out a "Ola, por favor me traga 75 cafes!" codificada.txt 37 31
+./decodificador.out codificada.txt . private.txt
+./codificador.out a "Ola, por favor me traga 75 cafes!" codificada.txt 29 31
+./decodificador.out codificada.txt . private.txt
 echo "----Erros esperados----"
 ./codificador.out a AEDS codificada.txt 3 2
 ./codificador.out a AEDS codificada.txt -3 3

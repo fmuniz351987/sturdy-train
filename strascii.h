@@ -12,6 +12,4 @@ void imprimir_vetor(int *vetor, int tamanho);
 
 int caractere_imprimivel(char caractere);
 
-int *split_ascii_puro(char *mensagem, int vector_terminator);
-
 int tamanho_vetor_terminado(int *vetor, int vector_terminator);

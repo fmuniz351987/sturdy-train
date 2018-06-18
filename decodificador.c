@@ -40,8 +40,11 @@ int main(int argc, char **argv) {
 	codificacao = converter_para_ascii_e_dividir(mensagem_codificada, n, 0);
 	mensagem_original = codificar(codificacao, n, d);
 	tamanho_maximo = strlen(mensagem_original);
+	printf("Mensagem original, numerica: %s\n", mensagem_original);
 	free(codificacao);
 	codificacao = converter_para_ascii_e_dividir(mensagem_original, 256, 0);
+	printf("Valores ASCII: ");
+	imprimir_vetor(codificacao, tamanho_maximo);
 	free(mensagem_original);
 	mensagem_original = ascii_to_str(codificacao, tamanho_maximo);
 	printf("Decodificada: %s\n", mensagem_original);

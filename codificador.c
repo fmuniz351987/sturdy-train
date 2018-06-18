@@ -4,6 +4,7 @@
 
 #include "rsa.h"
 #include "basemath.h"
+#include "strascii.h"
 
 #define INVALID_PARAMETERS 1
 
@@ -37,15 +38,22 @@ int main(int argc, char *argv[]) {
 	}
 
 	printf("Mensagem a codificar: %s\n", mensagem);
-	codificacao = converter_para_ascii_e_dividir(mensagem, totiente, 1);
+	printf("Valores em ASCII: ");
+	for(int i = 0; mensagem[i] != '\0'; i++) printf("%d ", (int)mensagem[i]);
+	printf("\n");
+	codificacao = converter_para_ascii_e_dividir(mensagem, n, 1);
+	printf("Mensagem em ASCII re-dividida: ");
+	imprimir_vetor(codificacao, strlen(mensagem));
 	mensagem_saida = codificar(codificacao, n, e);
+	printf("Codificada: ");
+	imprimir_vetor(codificacao, 5);
 	free(codificacao);
 	printf("Encriptada: %s\n", mensagem_saida);
 	arquivo_saida = fopen(imagem_saida, "w");	//mudar forma de abertura na imagem (parte 2)
 	fprintf(arquivo_saida, "%s.\n", mensagem_saida);
 	free(mensagem_saida);
 	fclose(arquivo_saida);
-	// printf("Chave publica: (%d, %d)\nChave privada: (%d, %d)\n", n, e, n, d);
+	printf("Chave publica: (%d, %d)\nChave privada: (%d, %d)\n", n, e, n, d);
 	sprintf(chave, "%d\n%d\n", n, d);
 	file_pkey = fopen("private.txt", "w");
 	fputs(chave, file_pkey);
