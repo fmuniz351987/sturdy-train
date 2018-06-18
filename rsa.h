@@ -1,7 +1,5 @@
-int decifrar(int mensagem_cifrada, int exp_decifragem, int modulo);
+int cifrar(int mensagem, int expoente, int modulo);
 
-int cifrar(int mensagem, int exp_cifragem, int modulo);
+char *codificar(int *ascii, int modulo, int expoente_cifragem);
 
-char *codificar(char *mensagem, int modulo, int totiente);
-
-char *decodificar(char *mensagem_codificada, int modulo, int exp_decifragem);
+int *converter_para_ascii_e_dividir(char *mensagem, int max_split, int para_ascii);

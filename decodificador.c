@@ -19,11 +19,13 @@ int main(int argc, char **argv) {
 	int n, d;
 	char *mensagem_codificada;
 	char *mensagem_original;
+	int *codificacao;
+	int tamanho_maximo;
 
 	if(argc != 4){
 		printf("Por favor, use o formato correto: \n");
-		printf("$./decodificador.out \"imagem_encriptada.ppm\" 'terminador' \"chave_privada.txt\"\n");
-		printf("Exemplo: \n$./decodificador.out codificada.txt . private.txt\n");
+		printf("$./decodificador.out \"imagem_encriptada.ppm\" 'terminador' \"chave_privada.txt\"\n\n");
+		printf("Exemplo: \n$./decodificador.out codificada.txt . private.txt\n\n");
 		return INVALID_PARAMETERS;
 	}
 
@@ -35,9 +37,19 @@ int main(int argc, char **argv) {
 	printf("Delimitador: %c\n", delimitador);
 	mensagem_codificada = ler_arquivo(imagem_codificada, delimitador);
 	printf("Mensagem codificada: %s\n", mensagem_codificada);
-	mensagem_original = decodificar(mensagem_codificada, n, d);
+	codificacao = converter_para_ascii_e_dividir(mensagem_codificada, n, 0);
+	mensagem_original = codificar(codificacao, n, d);
+	tamanho_maximo = strlen(mensagem_original);
+	printf("Mensagem original, numerica: %s\n", mensagem_original);
+	free(codificacao);
+	codificacao = converter_para_ascii_e_dividir(mensagem_original, 256, 0);
+	printf("Valores ASCII: ");
+	imprimir_vetor(codificacao, tamanho_maximo);
+	free(mensagem_original);
+	mensagem_original = ascii_to_str(codificacao, tamanho_maximo);
 	printf("Decodificada: %s\n", mensagem_original);
 	free(mensagem_codificada);
+	free(codificacao);
 	printf("\n\n");
 	return 0;
 }
