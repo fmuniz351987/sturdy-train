@@ -20,15 +20,13 @@ char *padding(int numero, int digitos) {
 	zeros = (char*) malloc((digitos_faltantes + 1) * sizeof(char));
 
 	sprintf(numero_preenchido, "%d", numero);
-	// printf("%s\n", numero_preenchido);
 	for(int i = 0; i < digitos_faltantes; i++){
 		zeros[i] = '0';
 	}
 	zeros[digitos_faltantes] = '\0';
-	// printf("%s\n", zeros);
+	
 	sprintf(numero_preenchido, "%s%d", zeros, numero);
 	free(zeros);
-	printf("%s\n", numero_preenchido);
 	return numero_preenchido;
 }
 
