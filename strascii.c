@@ -57,7 +57,7 @@ char *ascii_to_str(int *ascii, int tamanho) {
 	char *mensagem_saida = (char*) malloc((tamanho + 1)* sizeof(char));
 	for(i = 0; ascii[i] != VECTOR_TERMINATOR; i++) {
 		mensagem_saida[i] = (char)ascii[i];
-		if(!caractere_imprimivel(ascii[i])) printf("Erro! %d nao e imprimivel.\n", ascii[i]);
+		// if(!caractere_imprimivel(ascii[i])) printf("Erro! %d nao e imprimivel.\n", ascii[i]);
 	}
 	mensagem_saida[i] = '\0';	//garante que a mensagem termine onde deveria
 	return mensagem_saida;

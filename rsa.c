@@ -31,8 +31,9 @@ char *padding(int numero, int digitos) {
 
 char *pad_sequence(int *vetor, int digitos){
 	// converte um vetor em uma sequencia de numeros em string com padding
+	int i;
 	int tamanho = tamanho_vetor(vetor, VECTOR_TERMINATOR);
-	char *padded_sequence = (char*) malloc(tamanho * digitos * sizeof(char));
+	char *padded_sequence = (char*) malloc((tamanho * digitos + 1) * sizeof(char));
 	char *padded_number = (char*) malloc(digitos * sizeof(char));
 
 	//inicializando a string
@@ -41,11 +42,12 @@ char *pad_sequence(int *vetor, int digitos){
 	free(padded_number);
 
 	//colocando os elementos restantes
-	for(int i = 1; i < tamanho; i++){
+	for(i = 1; i < tamanho; i++){
 		padded_number = padding(vetor[i], digitos);
 		sprintf(padded_sequence, "%s%s", padded_sequence, padded_number);
 		free(padded_number);		
 	}
+	padded_sequence[tamanho * digitos + 1] = '\0';
 	return padded_sequence;
 }
 
