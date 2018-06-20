@@ -188,6 +188,14 @@ void testar_cifragem_e_decifragem(){
 	}
 }
 
+void testar_padding(){
+	printf("Testando padding...\n");
+	assert(!strcmp(padding(23, 4), "0023"));
+	assert(!strcmp(padding(102, 4), "0102"));
+	assert(!strcmp(padding(1, 2), "01"));
+	assert(!strcmp(padding(12304, 7), "0012304"));
+}
+
 // void testar_codificar(char *mensagem, char *saida_esperada, int p, int q){
 // 	printf("Testando codificacao...\n");
 // 	int totiente = (p-1)*(q-1);
@@ -263,5 +271,6 @@ int main(int argc, char **argv) {
 	testar_caracteres_imprimiveis();
 	testar_cifragem_e_decifragem();
 	testar_converter_ascii_e_dividir();
+	testar_padding();
 	return 0;
 }

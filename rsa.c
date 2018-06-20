@@ -11,6 +11,27 @@
 #define INVALID_PARAMETERS 1
 #define VECTOR_TERMINATOR -1
 
+char *padding(int numero, int digitos) {
+	// acrescenta zeros à esquerda de numero até que ele tenha o número de dígitos fornecido e retorna como char*
+	int digitos_faltantes = digitos - ndigitos(numero);
+	char *numero_preenchido, *zeros;
+
+	numero_preenchido = (char*) malloc(digitos * sizeof(char));
+	zeros = (char*) malloc((digitos_faltantes + 1) * sizeof(char));
+
+	sprintf(numero_preenchido, "%d", numero);
+	// printf("%s\n", numero_preenchido);
+	for(int i = 0; i < digitos_faltantes; i++){
+		zeros[i] = '0';
+	}
+	zeros[digitos_faltantes] = '\0';
+	// printf("%s\n", zeros);
+	sprintf(numero_preenchido, "%s%d", zeros, numero);
+	free(zeros);
+	printf("%s\n", numero_preenchido);
+	return numero_preenchido;
+}
+
 int cifrar(int mensagem, int expoente, int modulo){
 	/* Retorna o resultado de m^e mod n, onde:
 	e: expoente;
