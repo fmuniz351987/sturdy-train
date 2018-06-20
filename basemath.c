@@ -66,3 +66,12 @@ int inverso_modular(int a, int b)
 	if (x1 < 0) x1 += b0;
 	return x1;
 }
+
+int tamanho_vetor(int *vetor, int terminador){
+	//conta os elementos de um vetor até que um elemento seja igual a 'terminador'
+	int cont = 0;
+	while(vetor[cont] != terminador){
+		cont++;
+	}
+	return cont;
+}

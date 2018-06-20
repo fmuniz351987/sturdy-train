@@ -8,7 +8,6 @@
 #include "basemath.h"
 #include "strascii.h"
 
-#define INVALID_PARAMETERS 1
 #define VECTOR_TERMINATOR -1
 
 char *padding(int numero, int digitos) {
@@ -24,10 +23,30 @@ char *padding(int numero, int digitos) {
 		zeros[i] = '0';
 	}
 	zeros[digitos_faltantes] = '\0';
-	
+
 	sprintf(numero_preenchido, "%s%d", zeros, numero);
 	free(zeros);
 	return numero_preenchido;
+}
+
+char *pad_sequence(int *vetor, int digitos){
+	// converte um vetor em uma sequencia de numeros em string com padding
+	int tamanho = tamanho_vetor(vetor, VECTOR_TERMINATOR);
+	char *padded_sequence = (char*) malloc(tamanho * digitos * sizeof(char));
+	char *padded_number = (char*) malloc(digitos * sizeof(char));
+
+	//inicializando a string
+	padded_number = padding(vetor[0], digitos);
+	sprintf(padded_sequence, "%s", padded_number);
+	free(padded_number);
+
+	//colocando os elementos restantes
+	for(int i = 1; i < tamanho; i++){
+		padded_number = padding(vetor[i], digitos);
+		sprintf(padded_sequence, "%s%s", padded_sequence, padded_number);
+		free(padded_number);		
+	}
+	return padded_sequence;
 }
 
 int cifrar(int mensagem, int expoente, int modulo){

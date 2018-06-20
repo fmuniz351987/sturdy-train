@@ -196,6 +196,17 @@ void testar_padding(){
 	assert(!strcmp(padding(12304, 7), "0012304"));
 }
 
+void testar_padding_sequence(){
+	int vetor[] = {102, 41, 3, 0, 76, 15, 88, 274, VECTOR_TERMINATOR, 9, 54};
+	char *padded_vetor;
+
+	printf("Testando sequencia de padding...\n");
+	padded_vetor = pad_sequence(vetor, 3);
+	assert(!strcmp(padded_vetor, "102041003000076015088274"));
+	printf("%s\n", padded_vetor);
+	// free(padded_vetor);
+}
+
 // void testar_codificar(char *mensagem, char *saida_esperada, int p, int q){
 // 	printf("Testando codificacao...\n");
 // 	int totiente = (p-1)*(q-1);
@@ -272,5 +283,6 @@ int main(int argc, char **argv) {
 	testar_cifragem_e_decifragem();
 	testar_converter_ascii_e_dividir();
 	testar_padding();
+	testar_padding_sequence();
 	return 0;
 }

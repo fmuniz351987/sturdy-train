@@ -5,3 +5,5 @@ char *codificar(int *ascii, int modulo, int expoente_cifragem);
 int *converter_para_ascii_e_dividir(char *mensagem, int max_split, int para_ascii);
 
 char *padding(int numero, int digitos);
+
+char *pad_sequence(int *vetor, int digitos);
