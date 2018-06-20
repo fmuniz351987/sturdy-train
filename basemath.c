@@ -75,3 +75,9 @@ int tamanho_vetor(int *vetor, int terminador){
 	}
 	return cont;
 }
+
+int potencia10(int expoente){
+	int num = 1;
+	for(int i = 0; i < expoente; i++) num *= 10;
+	return num;
+}

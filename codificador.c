@@ -7,6 +7,7 @@
 #include "strascii.h"
 
 #define INVALID_PARAMETERS 1
+#define VECTOR_TERMINATOR -1
 
 int main(int argc, char *argv[]) {
 	// leitura dos parametros de entrada
@@ -38,15 +39,19 @@ int main(int argc, char *argv[]) {
 	}
 
 	printf("Mensagem a codificar: %s\n", mensagem);
-	printf("Valores em ASCII: ");
-	for(int i = 0; mensagem[i] != '\0'; i++) printf("%d ", (int)mensagem[i]);
-	printf("\n");
+	// printf("Valores em ASCII: ");
+	// for(int i = 0; mensagem[i] != '\0'; i++) printf("%d ", (int)mensagem[i]);
+	// printf("\n");
 	codificacao = converter_para_ascii_e_dividir(mensagem, totiente, 1);
-	printf("Mensagem em ASCII re-dividida: ");
-	imprimir_vetor(codificacao, strlen(mensagem));
-	mensagem_saida = codificar(codificacao, n, e);
-	printf("Codificada: ");
-	imprimir_vetor(codificacao, 5);
+	// printf("Mensagem em ASCII re-dividida: ");
+	// imprimir_vetor(codificacao, strlen(mensagem));
+	// codificar(codificacao, n, e);
+	// printf("Codificada: ");
+	// imprimir_vetor(codificacao, 5);
+	mensagem_saida = pad_sequence(codificacao, ndigitos(n));
+	// mensagem_saida = concatenar_vetor(codificacao, tamanho_vetor(codificacao), VECTOR_TERMINATOR);
+	// tamanho = strlen(mensagem_saida);
+	// mensagem_saida[tamanho] = '\0';
 	free(codificacao);
 	printf("Encriptada: %s\n", mensagem_saida);
 	arquivo_saida = fopen(imagem_saida, "w");	//mudar forma de abertura na imagem (parte 2)

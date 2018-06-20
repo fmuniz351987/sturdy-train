@@ -73,6 +73,7 @@ void testar_matematica() {
 	assert(ndigitos(11) == 2);
 	assert(menor_coprimo(2000) == 3);
 	assert(menor_coprimo(2*3*5*7*9*11*17) == 13);
+	assert(potencia10(3) == 1000);
 }
 
 void preencher_vetor(int *vetor, int tamanho){
@@ -149,14 +150,14 @@ void testar_concatenar_vetor() {
 	free(texto1); free(texto2);
 }
 
-void testar_split_ascii() {
+void testar_quebrar_em_blocos() {
 	char *mensagem = "123510394861039485103";
 	int tamanho = strlen(mensagem);
 	int *ascii;
 	int vetor_esperado[] = {123, 510, 394, 86, 103, 94, 85, 103, -1};
 
 	printf("Testando split de ascii...\n");
-	ascii = split_ascii(mensagem, 800, -1);
+	ascii = quebrar_em_blocos(mensagem, 800, -1);
 	// imprimir_vetor(ascii, 9);
 	for(int i = 0; i < tamanho && vetor_esperado[i] != -1; i++){
 		// printf("Esperado: %d\nCalculado: %d\n", vetor_esperado[i], ascii[i]);
@@ -254,6 +255,19 @@ void testar_converter_ascii_e_dividir(){
 	free(mensagem_dividida);
 }
 
+void testar_quebrar_em_blocos_de_tamanho_fixo(){
+	char mensagem[] = "234918374500012348971020";
+	int mensagem_quebrada[] = {234, 918, 374, 500, 12, 348, 971, 20};
+	int *vetor;
+	vetor = quebrar_em_blocos_de_tamanho_fixo(mensagem, 3);
+	imprimir_vetor(vetor, tamanho_vetor(vetor, VECTOR_TERMINATOR));
+	for(int i = 0; i < 8; i++){
+		printf("Testando igualdade de %d e %d...\n", vetor[i], mensagem_quebrada[i]);
+		assert(vetor[i] == mensagem_quebrada[i]);
+	}
+	free(vetor);
+}
+
 int main(int argc, char **argv) {
 	if(argc == 1){
 		printf("ERRO: Insira um numero de testes a serem realizados como argumento da \
@@ -268,7 +282,7 @@ int main(int argc, char **argv) {
 	testar_ascii_to_str(n_testes);
 	testar_strslice();
 	testar_concatenar_vetor();
-	testar_split_ascii();
+	testar_quebrar_em_blocos();
 	testar_cifrar();
 	// testar_codificar("AEDS", "83160237844", 29, 31);
 	// testar_codificar("AEDSAEDS", "83160237847631937844", 29, 31);
@@ -284,5 +298,6 @@ int main(int argc, char **argv) {
 	// testar_converter_ascii_e_dividir();
 	testar_padding();
 	testar_padding_sequence();
+	testar_quebrar_em_blocos_de_tamanho_fixo();
 	return 0;
 }

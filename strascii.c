@@ -90,11 +90,11 @@ char *concatenar_vetor(int *vetor, int tamanho, int invalido){
 	return texto_saida;
 }
 
-int *split_ascii(char *mensagem, int maximo, int vector_terminator) {
+int *quebrar_em_blocos(char *mensagem, int maximo, int vector_terminator) {
 	/* divide uma string numerica em varios inteiros menores que o parametro
 	fornencido para o maximo, e depois retorna um array com esses inteiros. */
 	int tamanho = strlen(mensagem);
-	int *ascii = (int*) malloc((tamanho) * sizeof(int));
+	int *blocos = (int*) malloc((tamanho) * sizeof(int));
 	int cont = 0;
 	int slice;
 	int i = 0, j = 0;
@@ -103,25 +103,37 @@ int *split_ascii(char *mensagem, int maximo, int vector_terminator) {
 	while(i < tamanho){
 		j = i + digitos;	//final do slice
 		if(mensagem[i] == '0') {
-			ascii[cont] = 0;
+			blocos[cont] = 0;
 			cont++;
 			i++;
 			continue;
 		}
 		slice = strslice(mensagem, i, j);
 		if(slice < maximo){
-			ascii[cont] = slice;
+			blocos[cont] = slice;
 			cont ++;
 			i = j;
 			continue;
 		} else {
 			slice = strslice(mensagem, i, j - 1);
-			ascii[cont] = slice;
+			blocos[cont] = slice;
 			cont ++;
 			i = j - 1;
 			continue;
 		}
 	}
-	ascii[cont] = vector_terminator;
-	return ascii;
+	blocos[cont] = vector_terminator;
+	return blocos;
+}
+
+int *quebrar_em_blocos_de_tamanho_fixo(char *mensagem, int tamanho_bloco){
+	int tamanho_mensagem = strlen(mensagem);
+	int tamanho_vetor = tamanho_mensagem / tamanho_bloco + 1;
+	int *blocos = (int*) malloc(tamanho_vetor * sizeof(int));
+
+	for(int i = 0; i < tamanho_vetor - 1; i ++){
+		blocos[i] = strslice(mensagem, i * tamanho_bloco, (i + 1) * tamanho_bloco);
+	}
+	blocos[tamanho_vetor] = -1;
+	return blocos;
 }

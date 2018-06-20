@@ -76,14 +76,14 @@ int *converter_para_ascii_e_dividir(char *mensagem, int max_split, int para_asci
 		ascii = str_to_ascii(mensagem);
 		mensagem_temp = concatenar_vetor(ascii, tamanho, VECTOR_TERMINATOR);
 		free(ascii);
-		ascii = split_ascii(mensagem_temp, max_split, VECTOR_TERMINATOR);
+		ascii = quebrar_em_blocos(mensagem_temp, max_split, VECTOR_TERMINATOR);
 	} else {
-		ascii = split_ascii(mensagem, max_split, VECTOR_TERMINATOR);
+		ascii = quebrar_em_blocos(mensagem, max_split, VECTOR_TERMINATOR);
 	}
 	return ascii;
 }
 
-char *codificar(int *ascii, int modulo, int expoente_cifragem) {
+void codificar(int *ascii, int modulo, int expoente_cifragem) {
 	/* Transforma a mensagem em um vetor com os respectivos valores ASCII;
 	em seguida, concatena esses vetores em uma string. Essa string e cortada de
 	tal maneira que cada corte seja sempre menor que o totiente, e então a nova 
@@ -91,16 +91,10 @@ char *codificar(int *ascii, int modulo, int expoente_cifragem) {
 	cifrado, e entao concatenado novamente, gerando a mensagem de saida.*/
 
 	int i = 0;
-	char *mensagem_saida;
 	int tamanho = 0;
 
 	for(i = 0; ascii[i] != VECTOR_TERMINATOR; i++){
 		ascii[i] = cifrar(ascii[i], expoente_cifragem, modulo);
 		tamanho++;
 	}
-	ascii[i] = VECTOR_TERMINATOR;
-	mensagem_saida = concatenar_vetor(ascii, tamanho, VECTOR_TERMINATOR);
-	tamanho = strlen(mensagem_saida);
-	mensagem_saida[tamanho] = '\0';
-	return mensagem_saida;
 }
