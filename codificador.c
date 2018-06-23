@@ -9,8 +9,25 @@
 #define INVALID_PARAMETERS 1
 #define VECTOR_TERMINATOR -1
 
+void validar_primos(int p, int q)
+{
+	// confere se os valores fornecidos de p e q são válidos.
+	if(!e_primo(p) || !e_primo(q)){
+		// termina o programa caso p ou q nao sejam primos
+		printf("ERRO: p e q devem ser numeros primos.\n");
+		exit(INVALID_PARAMETERS);
+	}
+	if(p * q < 255){
+		//garante que n e pelo menos 9, caso contrario qualquer digito da tabela ASCII
+		//que seja maior que n quebrara o codigo na etapa de segmentacao da mensagem
+		printf("ERRO: o produto de p por q deve ser maior ou igual a 255.\n");
+		exit(INVALID_PARAMETERS);
+	}
+
+}
+
+
 int main(int argc, char *argv[]) {
-	// leitura dos parametros de entrada
 	// char *imagem_entrada = argv[1];	//sera usada na segunda parte do TP
 	char *mensagem = argv[2];
 	char *imagem_saida = argv[3];		//atualmente codificada.txt nos testes; será um ppm na parte 2
@@ -26,43 +43,27 @@ int main(int argc, char *argv[]) {
 	int *codificacao;
 	FILE *file_pkey;	//arquivo de saida da chave privada
 	
-	if(!e_primo(p) || !e_primo(q)){
-		// termina o programa caso p ou q nao sejam primos
-		printf("ERRO: p e q devem ser numeros primos.\n");
-		return INVALID_PARAMETERS;
-	}
-	if(n < 255){
-		//garante que n e pelo menos 9, caso contrario qualquer digito da tabela ASCII
-		//que seja maior que n quebrara o codigo na etapa de segmentacao da mensagem
-		printf("ERRO: o produto de p por q deve ser maior ou igual a 255.\n");
-		return INVALID_PARAMETERS;
-	}
-
-	printf("Mensagem a codificar: %s\n", mensagem);
-	printf("Valores em ASCII: ");
-	for(int i = 0; mensagem[i] != '\0'; i++) printf("%d ", (int)mensagem[i]);
-	printf("\n");
+	validar_primos(p, q);
+	
+	//codificando
 	codificacao = converter_para_ascii_e_dividir(mensagem, totiente, 1);
-	printf("Mensagem em ASCII re-dividida: ");
-	imprimir_vetor(codificacao);
-	// codificar(codificacao, n, e);
-	// printf("Codificada: ");
-	// imprimir_vetor(codificacao);
+	codificar(codificacao, n, e);
 	mensagem_saida = pad_sequence(codificacao, ndigitos(n));
-	// mensagem_saida = concatenar_vetor(codificacao);
-	// tamanho = strlen(mensagem_saida);
-	// mensagem_saida[tamanho] = '\0';
 	free(codificacao);
 	printf("Encriptada: %s\n", mensagem_saida);
+
+	//salvando mensagem externamente
 	arquivo_saida = fopen(imagem_saida, "w");	//mudar forma de abertura na imagem (parte 2)
 	fprintf(arquivo_saida, "%s.\n", mensagem_saida);
 	free(mensagem_saida);
 	fclose(arquivo_saida);
-	printf("Chave publica: (%d, %d)\nChave privada: (%d, %d)\n", n, e, n, d);
+
+	//salvando chave privada externamente em private.txt
 	sprintf(chave, "%d\n%d\n", n, d);
 	file_pkey = fopen("private.txt", "w");
 	fputs(chave, file_pkey);
 	free(chave);
 	fclose(file_pkey);
+
 	return 0;
 }

@@ -142,6 +142,6 @@ int *quebrar_em_blocos_de_tamanho_fixo(char *mensagem, int tamanho_bloco){
 	for(int i = 0; i < tamanho_vetor - 1; i ++){
 		blocos[i] = strslice(mensagem, i * tamanho_bloco, (i + 1) * tamanho_bloco);
 	}
-	blocos[tamanho_vetor] = -1;
+	blocos[tamanho_vetor - 1] = VECTOR_TERMINATOR;
 	return blocos;
 }

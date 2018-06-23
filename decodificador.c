@@ -10,6 +10,16 @@
 
 #define INVALID_PARAMETERS 1
 
+void testar_parametros(int argc)
+{
+	if(argc != 4){
+		printf("Por favor, use o formato correto: \n");
+		printf("$./decodificador.out \"imagem_encriptada.ppm\" 'terminador' \"chave_privada.txt\"\n\n");
+		printf("Exemplo: \n$./decodificador.out codificada.txt . private.txt\n\n");
+		exit(INVALID_PARAMETERS);
+	}
+}
+
 int main(int argc, char **argv) {
 	char *imagem_codificada = argv[1];
 	char delimitador = argv[2][0];
@@ -20,12 +30,7 @@ int main(int argc, char **argv) {
 	char *mensagem_original;
 	int *codificacao;
 
-	if(argc != 4){
-		printf("Por favor, use o formato correto: \n");
-		printf("$./decodificador.out \"imagem_encriptada.ppm\" 'terminador' \"chave_privada.txt\"\n\n");
-		printf("Exemplo: \n$./decodificador.out codificada.txt . private.txt\n\n");
-		return INVALID_PARAMETERS;
-	}
+	testar_parametros(argc);
 
 	// obtendo a chave privada
 	file = fopen(chave, "r");
@@ -36,30 +41,26 @@ int main(int argc, char **argv) {
 
 	// lendo mensagem codificada
 	mensagem_codificada = ler_arquivo(imagem_codificada, delimitador);
-	printf("Mensagem codificada: %s\n", mensagem_codificada);
 
 	// quebrando mensagem em blocos cifrados
 	codificacao = quebrar_em_blocos_de_tamanho_fixo(mensagem_codificada, ndigitos(n));
-	printf("Blocos quebrados:\n");
-	imprimir_vetor(codificacao);
+	free(mensagem_codificada);
 
 	// decodificando os blocos
 	codificar(codificacao, n, d);
 
 	// re-fazendo a divisão dos blocos para ASCII
 	mensagem_original = concatenar_vetor(codificacao);
+	free(codificacao);
 	codificacao = quebrar_em_blocos(mensagem_original, 256);
-	printf("Valores ASCII: ");
-	imprimir_vetor(codificacao);
+	free(mensagem_original);
 
 	// transformando o vetor ascii em uma string
 	mensagem_original = ascii_to_str(codificacao);
+	free(codificacao);
 	printf("Mensagem original: \n");
 	printf("%s\n", mensagem_original);
+	free(mensagem_original);
 
-	//liberando memoria
-	// free(mensagem_codificada);
-	// free(mensagem_original);
-	// free(codificacao);
 	return 0;
 }

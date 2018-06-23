@@ -57,7 +57,7 @@ int cifrar(int mensagem, int expoente, int modulo){
 	n: modulo;
 	m: mensagem a ser cifrada (em numeros). */
 
-	int num = 1;
+	long long int num = 1;
 
 	for(int i = 0; i < expoente; i++){
 		num *= mensagem;
