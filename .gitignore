@@ -58,6 +58,4 @@ desc_TP.pdf
 *.sublime-workspace
 
 # Code-generated
-private.txt
-codificada.txt
-log.txt
+*.txt
