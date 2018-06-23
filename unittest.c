@@ -90,7 +90,7 @@ void testar_impressao_vetor(int n_testes){
 	for(int i = 1; i <= n_testes; i++) {
 		int *vetor = criar_vetor(i);
 		preencher_vetor(vetor, i);
-		imprimir_vetor(vetor, i);		//funcao sendo testada
+		imprimir_vetor(vetor);		//funcao sendo testada
 		free(vetor);
 	}
 }
@@ -104,7 +104,7 @@ void testar_str_to_ascii(){
 	for(int i = 0; i < tamanho; i++){
 		assert(texto[i] == (char) vetor[i]);
 	}
-	// imprimir_vetor(vetor, tamanho);
+	// imprimir_vetor(vetor);
 	free(vetor);
 }
 
@@ -115,7 +115,7 @@ void testar_ascii_to_str(int n_testes){
 		int *vetor = criar_vetor(i + 1);
 		char *texto = criar_texto(i + 1);
 		preencher_vetor(vetor, i);
-		ascii_to_str(vetor, i);
+		ascii_to_str(vetor);
 		// printf("%s\n", texto);
 		free(vetor);
 		free(texto);
@@ -143,8 +143,8 @@ void testar_concatenar_vetor() {
 		vetor2[] = {0,2,0,3,0,6,6,10, 471, -1, 5}, n_v2 = 11;
 	char *texto1 = malloc((n_v1 + 1)*sizeof(char));
 	char *texto2 = malloc((n_v2 + 1) * sizeof(char));
-	texto1 = concatenar_vetor(vetor1, n_v1, -1);
-	texto2 = concatenar_vetor(vetor2, n_v2, -1);
+	texto1 = concatenar_vetor(vetor1);
+	texto2 = concatenar_vetor(vetor2);
 	assert(!strcmp(texto1, "12345"));
 	assert(!strcmp(texto2, "020306610471"));
 	free(texto1); free(texto2);
@@ -157,8 +157,8 @@ void testar_quebrar_em_blocos() {
 	int vetor_esperado[] = {123, 510, 394, 86, 103, 94, 85, 103, -1};
 
 	printf("Testando split de ascii...\n");
-	ascii = quebrar_em_blocos(mensagem, 800, -1);
-	// imprimir_vetor(ascii, 9);
+	ascii = quebrar_em_blocos(mensagem, 800);
+	// imprimir_vetor(ascii);
 	for(int i = 0; i < tamanho && vetor_esperado[i] != -1; i++){
 		// printf("Esperado: %d\nCalculado: %d\n", vetor_esperado[i], ascii[i]);
 		assert(ascii[i] == vetor_esperado[i]);
@@ -260,7 +260,7 @@ void testar_quebrar_em_blocos_de_tamanho_fixo(){
 	int mensagem_quebrada[] = {234, 918, 374, 500, 12, 348, 971, 20};
 	int *vetor;
 	vetor = quebrar_em_blocos_de_tamanho_fixo(mensagem, 3);
-	imprimir_vetor(vetor, tamanho_vetor(vetor, VECTOR_TERMINATOR));
+	imprimir_vetor(vetor);
 	for(int i = 0; i < 8; i++){
 		printf("Testando igualdade de %d e %d...\n", vetor[i], mensagem_quebrada[i]);
 		assert(vetor[i] == mensagem_quebrada[i]);

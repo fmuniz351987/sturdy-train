@@ -32,7 +32,7 @@ char *padding(int numero, int digitos) {
 char *pad_sequence(int *vetor, int digitos){
 	// converte um vetor em uma sequencia de numeros em string com padding
 	int i;
-	int tamanho = tamanho_vetor(vetor, VECTOR_TERMINATOR);
+	int tamanho = tamanho_vetor(vetor);
 	char *padded_sequence = (char*) malloc((tamanho * digitos + 1) * sizeof(char));
 	char *padded_number = (char*) malloc(digitos * sizeof(char));
 
@@ -70,31 +70,25 @@ int *converter_para_ascii_e_dividir(char *mensagem, int max_split, int para_asci
 	// retorna um vetor com uma string dividida em blocos menores que max_split
 	char *mensagem_temp;
 	int *ascii;
-	int tamanho = strlen(mensagem);
 
 	if(para_ascii){
 		ascii = str_to_ascii(mensagem);
-		mensagem_temp = concatenar_vetor(ascii, tamanho, VECTOR_TERMINATOR);
+		mensagem_temp = concatenar_vetor(ascii);
 		free(ascii);
-		ascii = quebrar_em_blocos(mensagem_temp, max_split, VECTOR_TERMINATOR);
+		ascii = quebrar_em_blocos(mensagem_temp, max_split);
 	} else {
-		ascii = quebrar_em_blocos(mensagem, max_split, VECTOR_TERMINATOR);
+		ascii = quebrar_em_blocos(mensagem, max_split);
 	}
 	return ascii;
 }
 
-void codificar(int *ascii, int modulo, int expoente_cifragem) {
-	/* Transforma a mensagem em um vetor com os respectivos valores ASCII;
-	em seguida, concatena esses vetores em uma string. Essa string e cortada de
-	tal maneira que cada corte seja sempre menor que o totiente, e então a nova 
-	string cortada (sliced) e armazenada no vetor *codificado. Esse vetor e, entao,
-	cifrado, e entao concatenado novamente, gerando a mensagem de saida.*/
-
+void codificar(int *numeros, int modulo, int expoente_cifragem) {
+	// Cifra ou decifra vários termos de um vetor usando o modulo e o expoente fornecido.
 	int i = 0;
 	int tamanho = 0;
 
-	for(i = 0; ascii[i] != VECTOR_TERMINATOR; i++){
-		ascii[i] = cifrar(ascii[i], expoente_cifragem, modulo);
+	for(i = 0; numeros[i] != VECTOR_TERMINATOR; i++){
+		numeros[i] = cifrar(numeros[i], expoente_cifragem, modulo);
 		tamanho++;
 	}
 }

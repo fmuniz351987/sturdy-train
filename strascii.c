@@ -9,10 +9,10 @@ ASCII de cada caractere em char[] */
 
 #define VECTOR_TERMINATOR -1
 
-int tamanho_vetor_terminado(int *vetor, int vector_terminator)
+int tamanho_vetor(int *vetor)
 {
 	int i = 0;
-	while(vetor[i] != vector_terminator){
+	while(vetor[i] != VECTOR_TERMINATOR){
 		i++;
 	}
 	return i;
@@ -33,7 +33,7 @@ int max_vetor_positivos(int *vetor, int tamanho){
 	return max; 
 }
 
-void imprimir_vetor(int *vetor, int tamanho){
+void imprimir_vetor(int *vetor){
 	//imprime um vetor de inteiros para propósitos de debugging
 	for(int i = 0; vetor[i] != VECTOR_TERMINATOR; i++){
 		printf("%d ", vetor[i]);
@@ -44,17 +44,21 @@ void imprimir_vetor(int *vetor, int tamanho){
 int *str_to_ascii(char *mensagem) {
 	//transforma a mensagem em um vetor com valores ASCII
 	int tamanho = strlen(mensagem);
-	int *ascii = (int*) malloc(tamanho * sizeof(int));
+	int *ascii = (int*) malloc((tamanho + 1) * sizeof(int));
 	for(int i = 0; i < tamanho; i++){
 		ascii[i] = (int) mensagem[i];
 	}
+	ascii[tamanho] = VECTOR_TERMINATOR;
 	return ascii;
 }
 
-char *ascii_to_str(int *ascii, int tamanho) {
+char *ascii_to_str(int *ascii) {
 	//transforma de volta um vetor ASCII em uma mensagem char[]
 	int i;
-	char *mensagem_saida = (char*) malloc((tamanho + 1)* sizeof(char));
+	char *mensagem_saida;
+	int tamanho = tamanho_vetor(ascii);
+
+	mensagem_saida = (char*) malloc((tamanho + 1)* sizeof(char));
 	for(i = 0; ascii[i] != VECTOR_TERMINATOR; i++) {
 		mensagem_saida[i] = (char)ascii[i];
 		// if(!caractere_imprimivel(ascii[i])) printf("Erro! %d nao e imprimivel.\n", ascii[i]);
@@ -78,19 +82,23 @@ int strslice(char *texto, int inicio, int fim) {
 	return slice_value;
 }
 
-char *concatenar_vetor(int *vetor, int tamanho, int invalido){
+char *concatenar_vetor(int *vetor){
 	/* transforma uma sequencia de numeros (vetor) em uma string, que é armazenada
 	em texto_saida */
-	char *texto_saida = (char*) malloc(tamanho * ndigitos(max_vetor_positivos(vetor, tamanho) + 2)
+	char *texto_saida;
+	int tamanho = tamanho_vetor(vetor);
+
+	texto_saida = (char*) malloc(tamanho * ndigitos(max_vetor_positivos(vetor, tamanho) + 2)
 			 * sizeof(char));
 	texto_saida[0] = '\0';
-	for(int i = 0; i < tamanho && vetor[i] != invalido; i++){
+
+	for(int i = 0; vetor[i] != VECTOR_TERMINATOR; i++){
 		sprintf(texto_saida, "%s%i", texto_saida, vetor[i]);
 	}
 	return texto_saida;
 }
 
-int *quebrar_em_blocos(char *mensagem, int maximo, int vector_terminator) {
+int *quebrar_em_blocos(char *mensagem, int maximo) {
 	/* divide uma string numerica em varios inteiros menores que o parametro
 	fornencido para o maximo, e depois retorna um array com esses inteiros. */
 	int tamanho = strlen(mensagem);
@@ -122,7 +130,7 @@ int *quebrar_em_blocos(char *mensagem, int maximo, int vector_terminator) {
 			continue;
 		}
 	}
-	blocos[cont] = vector_terminator;
+	blocos[cont] = VECTOR_TERMINATOR;
 	return blocos;
 }
 

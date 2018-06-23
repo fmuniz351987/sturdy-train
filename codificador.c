@@ -39,17 +39,17 @@ int main(int argc, char *argv[]) {
 	}
 
 	printf("Mensagem a codificar: %s\n", mensagem);
-	// printf("Valores em ASCII: ");
-	// for(int i = 0; mensagem[i] != '\0'; i++) printf("%d ", (int)mensagem[i]);
-	// printf("\n");
+	printf("Valores em ASCII: ");
+	for(int i = 0; mensagem[i] != '\0'; i++) printf("%d ", (int)mensagem[i]);
+	printf("\n");
 	codificacao = converter_para_ascii_e_dividir(mensagem, totiente, 1);
-	// printf("Mensagem em ASCII re-dividida: ");
-	// imprimir_vetor(codificacao, strlen(mensagem));
+	printf("Mensagem em ASCII re-dividida: ");
+	imprimir_vetor(codificacao);
 	// codificar(codificacao, n, e);
 	// printf("Codificada: ");
-	// imprimir_vetor(codificacao, 5);
+	// imprimir_vetor(codificacao);
 	mensagem_saida = pad_sequence(codificacao, ndigitos(n));
-	// mensagem_saida = concatenar_vetor(codificacao, tamanho_vetor(codificacao), VECTOR_TERMINATOR);
+	// mensagem_saida = concatenar_vetor(codificacao);
 	// tamanho = strlen(mensagem_saida);
 	// mensagem_saida[tamanho] = '\0';
 	free(codificacao);

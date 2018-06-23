@@ -9,7 +9,6 @@
 #include "ioarquivos.h"
 
 #define INVALID_PARAMETERS 1
-#define VECTOR_TERMINATOR -1
 
 int main(int argc, char **argv) {
 	char *imagem_codificada = argv[1];
@@ -20,7 +19,6 @@ int main(int argc, char **argv) {
 	char *mensagem_codificada;
 	char *mensagem_original;
 	int *codificacao;
-	int tamanho_maximo;
 
 	if(argc != 4){
 		printf("Por favor, use o formato correto: \n");
@@ -29,27 +27,39 @@ int main(int argc, char **argv) {
 		return INVALID_PARAMETERS;
 	}
 
-	//obtendo a chave privada
+	// obtendo a chave privada
 	file = fopen(chave, "r");
 	fscanf(file, "%d\n%d", &n, &d);
 	fclose(file);
 	printf("Chave privada: (%d, %d)\n", n, d);
 	printf("Delimitador: %c\n", delimitador);
+
+	// lendo mensagem codificada
 	mensagem_codificada = ler_arquivo(imagem_codificada, delimitador);
 	printf("Mensagem codificada: %s\n", mensagem_codificada);
-	codificacao = converter_para_ascii_e_dividir(mensagem_codificada, n, 0);
-	mensagem_original = codificar(codificacao, n, d);
-	tamanho_maximo = strlen(mensagem_original);
-	printf("Mensagem original, numerica: %s\n", mensagem_original);
-	free(codificacao);
-	codificacao = converter_para_ascii_e_dividir(mensagem_original, 256, 0);
+
+	// quebrando mensagem em blocos cifrados
+	codificacao = quebrar_em_blocos_de_tamanho_fixo(mensagem_codificada, ndigitos(n));
+	printf("Blocos quebrados:\n");
+	imprimir_vetor(codificacao);
+
+	// decodificando os blocos
+	codificar(codificacao, n, d);
+
+	// re-fazendo a divisão dos blocos para ASCII
+	mensagem_original = concatenar_vetor(codificacao);
+	codificacao = quebrar_em_blocos(mensagem_original, 256);
 	printf("Valores ASCII: ");
-	imprimir_vetor(codificacao, tamanho_maximo);
-	free(mensagem_original);
-	mensagem_original = ascii_to_str(codificacao, tamanho_maximo);
-	printf("Decodificada: %s\n", mensagem_original);
-	free(mensagem_codificada);
-	free(codificacao);
-	printf("\n\n");
+	imprimir_vetor(codificacao);
+
+	// transformando o vetor ascii em uma string
+	mensagem_original = ascii_to_str(codificacao);
+	printf("Mensagem original: \n");
+	printf("%s\n", mensagem_original);
+
+	//liberando memoria
+	// free(mensagem_codificada);
+	// free(mensagem_original);
+	// free(codificacao);
 	return 0;
 }
