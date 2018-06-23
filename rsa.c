@@ -30,7 +30,7 @@ char *padding(int numero, int digitos) {
 }
 
 char *pad_sequence(int *vetor, int digitos){
-	// converte um vetor em uma sequencia de numeros em string com padding
+	// converte um vetor em uma sequencia de numeros em string com padding ("estufada" com zeros à esquerda)
 	int i;
 	int tamanho = tamanho_vetor(vetor);
 	char *padded_sequence = (char*) malloc((tamanho * digitos + 1) * sizeof(char));

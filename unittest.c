@@ -208,17 +208,6 @@ void testar_padding_sequence(){
 	free(padded_vetor);
 }
 
-// void testar_codificar(char *mensagem, char *saida_esperada, int p, int q){
-// 	printf("Testando codificacao...\n");
-// 	int totiente = (p-1)*(q-1);
-// 	int modulo = p * q;
-// 	char *mensagem_saida;
-// 	mensagem_saida = codificar(mensagem, modulo, totiente);
-// 	assert(!strcmp(mensagem_saida, saida_esperada));
-// 	printf("Esperada:%s\nCalculada:%s\n", saida_esperada, mensagem_saida);
-// 	free(mensagem_saida);
-// }
-
 void testar_caracteres_imprimiveis(){
 	for(int i = 0; i < 256; i++){
 		if(caractere_imprimivel((char) i)){
@@ -284,18 +273,8 @@ int main(int argc, char **argv) {
 	testar_concatenar_vetor();
 	testar_quebrar_em_blocos();
 	testar_cifrar();
-	// testar_codificar("AEDS", "83160237844", 29, 31);
-	// testar_codificar("AEDSAEDS", "83160237847631937844", 29, 31);
-	// testar_codificar("Mensagem secreta!", 
-	//                  "12551110154397513022700156312612167250396117602187",
-	//                  101, 31);
-	// testar_codificar("Mensagem secreta!", 
-	//                  "12551110154397513022700156312612167250396117602187",
-	//                  101, 31);
-	// testar_codificar(supertexto, supertexto_codificado, 101, 103);
 	testar_caracteres_imprimiveis();
 	testar_cifragem_e_decifragem();
-	// testar_converter_ascii_e_dividir();
 	testar_padding();
 	testar_padding_sequence();
 	testar_quebrar_em_blocos_de_tamanho_fixo();
