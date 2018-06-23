@@ -2,7 +2,7 @@
 Aluno: Felipe Ribas Muniz
 
 ## Introdução
-Este programa está dividido em 4 módulos essenciais, e 2 programas principais, um programa de teste unitário, um script de testes globais e um código python: 
+Este programa está dividido em 4 módulos essenciais, e 2 programas principais, um programa de teste unitário e um script de testes globais: 
 - codificador.c - programa principal de codificação
 - decodificador.c - programa principal de decodificação
 - unittest.c é um programa à parte feito exclusivamente para fins de debugging e testes unitários das funções usadas nos módulos essenciais
