@@ -37,7 +37,6 @@ int main(int argc, char **argv) {
 	fscanf(file, "%d\n%d", &n, &d);
 	fclose(file);
 	printf("Chave privada: (%d, %d)\n", n, d);
-	printf("Delimitador: %c\n", delimitador);
 
 	// lendo mensagem codificada
 	mensagem_codificada = ler_arquivo(imagem_codificada, delimitador);
