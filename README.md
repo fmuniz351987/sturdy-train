@@ -11,7 +11,6 @@ Este programa está dividido em 4 módulos essenciais, e 2 programas principais,
 - strascii - funções de tratamento de strings e números, concatenação, conversão ascii / caracteres, etc.
 - ioarquivos - para leitura e gravação dos arquivos usados pelo programa
 - rsa - funções de codificação e decodificação
-- cifrar2931.py é um arquivo de teste usando uma linguagem de programação mais simples para comparar com resultados esperados sem precisar preocupar com ponteiros.
 
 Além disso, o arquivo makefile contém informações sobre como a compilação deve ser feita e é um script básico que pode ser executado pelo comando:
 
