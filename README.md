@@ -32,7 +32,7 @@ $./decodificador.out imagem_codificada.ppm 'delimitador' chave_privada.txt
 
 Para rodar testes unitários:
 ```bash
-$ .unittest.out <numero_de_testes>
+$./unittest.out numero_de_testes
 ```
 
 ## Funcionamento do codificador
