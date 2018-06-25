@@ -2,7 +2,7 @@
 Aluno: Felipe Ribas Muniz
 
 ## Introdução
-Este programa está dividido em 4 módulos essenciais, e 2 programas principais, um programa de teste unitário e um script de testes globais: 
+Este programa está dividido em 4 módulos essenciais, 2 programas principais, um programa de teste unitário e um script de testes globais: 
 - codificador.c - programa principal de codificação
 - decodificador.c - programa principal de decodificação
 - unittest.c é um programa à parte feito exclusivamente para fins de debugging e testes unitários das funções usadas nos módulos essenciais
@@ -29,6 +29,12 @@ Para decodificar, use:
 ```bash
 $./decodificador.out imagem_codificada.ppm 'delimitador' chave_privada.txt
 ```
+
+Para rodar testes unitários:
+```bash
+$ .unittest.out <numero_de_testes>
+```
+
 ## Funcionamento do codificador
 O codificador, inicialmente, pega os valores fornecidos de p e q, encontra n tal que `n = p * q`, e calcula o totiente de n, caso p e q sejam primos, tal que `totiente(n) = (p - 1) * (q - 1)`. Em seguida, a mensagem a ser codificada é convertira em valores ASCII, concatenada em um único bloco, e enfim re-dividida em blocos menores do que o totiente de n. Quando um bloco começa com zero, esse bloco será nulo, de tal forma que o zero seja preservado para ser decodificado posteriormente. Por fim, esses blocos são 'estufados' (_padding_) com zeros à sua esquerda até terem o mesmo número de dígitos de n. Eles são, então, concatenados, e a mensagem codificada é o resultado dessa concatenação.
 
