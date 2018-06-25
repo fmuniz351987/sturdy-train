@@ -1,4 +1,4 @@
-int totiente_primos(int p, int q);
+int totiente_produto(int p, int q);
 
 int e_primo(int x);
 

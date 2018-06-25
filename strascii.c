@@ -145,3 +145,17 @@ int *quebrar_em_blocos_de_tamanho_fixo(char *mensagem, int tamanho_bloco){
 	blocos[tamanho_vetor - 1] = VECTOR_TERMINATOR;
 	return blocos;
 }
+
+int *converter_para_ascii_e_dividir(char *mensagem, int max_split){
+	// retorna um vetor com uma string dividida em blocos menores que max_split
+	char *mensagem_temp;
+	int *ascii;
+	
+	ascii = str_to_ascii(mensagem);
+	mensagem_temp = concatenar_vetor(ascii);
+	free(ascii);
+	ascii = quebrar_em_blocos(mensagem_temp, max_split);
+	free(mensagem_temp);
+	
+	return ascii;
+}

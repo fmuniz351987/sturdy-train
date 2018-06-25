@@ -50,7 +50,8 @@ void assert(int expressao){
 
 void testar_matematica() {
 	printf("Testando matematica...\n");
-	assert(totiente_primos(29,31) == 840);
+	assert(totiente_produto(29,31) == 840);
+	assert(totiente_produto(2,6) == 4);
 	assert(e_primo(31));
 	assert(e_primo(2*3*5*7*11*13*17)+1);
 	assert(e_primo(2*3*5*7*11*13*17*23*29)+1);
@@ -222,7 +223,7 @@ void testar_converter_ascii_e_dividir(){
 	char *mensagem = "Alo mundo!";
 	int maximo = 111;
 	printf("Testando divisao de mensagem...\n");
-	mensagem_dividida = converter_para_ascii_e_dividir(mensagem, maximo, 1);
+	mensagem_dividida = converter_para_ascii_e_dividir(mensagem, maximo);
 	for(int i = 0; mensagem_dividida[i] != -1; i++){
 		printf("%d ", mensagem_dividida[i]);
 	}

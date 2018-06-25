@@ -15,3 +15,5 @@ void imprimir_vetor(int *vetor);
 int caractere_imprimivel(char caractere);
 
 int tamanho_vetor(int *vetor);
+
+int *converter_para_ascii_e_dividir(char *mensagem, int max_split);

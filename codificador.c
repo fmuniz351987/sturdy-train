@@ -35,7 +35,7 @@ int main(int argc, char *argv[]) {
 	int p = atoi(argv[4]);
 	int q = atoi(argv[5]);
 	int n = p * q;
-	int totiente = totiente_primos(p, q);
+	int totiente = totiente_produto(p, q);
 	int e = menor_coprimo(totiente);	//expoente de cifragem
 	int d = inverso_modular(e, totiente);	//expoente de decifragem
 	char *mensagem_saida;
@@ -46,7 +46,7 @@ int main(int argc, char *argv[]) {
 	validar_primos(p, q);
 	
 	//codificando
-	codificacao = converter_para_ascii_e_dividir(mensagem, totiente, 1);
+	codificacao = converter_para_ascii_e_dividir(mensagem, totiente);
 	codificar(codificacao, n, e);
 	mensagem_saida = pad_sequence(codificacao, ndigitos(n));
 	free(codificacao);

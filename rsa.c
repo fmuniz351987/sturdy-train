@@ -10,6 +10,32 @@
 
 #define VECTOR_TERMINATOR -1
 
+int cifrar(int mensagem, int expoente, int modulo){
+	/* Retorna o resultado de m^e mod n, onde:
+	e: expoente;
+	n: modulo;
+	m: mensagem a ser cifrada (em numeros). */
+
+	long long int num = 1;
+
+	for(int i = 0; i < expoente; i++){
+		num *= mensagem;
+		num %= modulo;
+	}
+	return num;
+}
+
+void codificar(int *numeros, int modulo, int expoente_cifragem) {
+	// Cifra ou decifra vários termos de um vetor usando o modulo e o expoente fornecido.
+	int i = 0;
+	int tamanho = 0;
+
+	for(i = 0; numeros[i] != VECTOR_TERMINATOR; i++){
+		numeros[i] = cifrar(numeros[i], expoente_cifragem, modulo);
+		tamanho++;
+	}
+}
+
 char *padding(int numero, int digitos) {
 	// acrescenta zeros à esquerda de numero até que ele tenha o número de dígitos fornecido e retorna como char*
 	int digitos_faltantes = digitos - ndigitos(numero);
@@ -49,46 +75,4 @@ char *pad_sequence(int *vetor, int digitos){
 	}
 	padded_sequence[tamanho * digitos + 1] = '\0';
 	return padded_sequence;
-}
-
-int cifrar(int mensagem, int expoente, int modulo){
-	/* Retorna o resultado de m^e mod n, onde:
-	e: expoente;
-	n: modulo;
-	m: mensagem a ser cifrada (em numeros). */
-
-	long long int num = 1;
-
-	for(int i = 0; i < expoente; i++){
-		num *= mensagem;
-		num %= modulo;
-	}
-	return num;
-}
-
-int *converter_para_ascii_e_dividir(char *mensagem, int max_split, int para_ascii){
-	// retorna um vetor com uma string dividida em blocos menores que max_split
-	char *mensagem_temp;
-	int *ascii;
-
-	if(para_ascii){
-		ascii = str_to_ascii(mensagem);
-		mensagem_temp = concatenar_vetor(ascii);
-		free(ascii);
-		ascii = quebrar_em_blocos(mensagem_temp, max_split);
-	} else {
-		ascii = quebrar_em_blocos(mensagem, max_split);
-	}
-	return ascii;
-}
-
-void codificar(int *numeros, int modulo, int expoente_cifragem) {
-	// Cifra ou decifra vários termos de um vetor usando o modulo e o expoente fornecido.
-	int i = 0;
-	int tamanho = 0;
-
-	for(i = 0; numeros[i] != VECTOR_TERMINATOR; i++){
-		numeros[i] = cifrar(numeros[i], expoente_cifragem, modulo);
-		tamanho++;
-	}
 }
